@@ -2,18 +2,27 @@ import java.util.Scanner;
 
 public class App {
 
+    // 4) 저장할 배열을 만든다
+    static String[] names = new String[100];
+    static String[] emails = new String[100];
+    static String[] passwords = new String[100];
+
+    static int index = 0;
+
+    // 1) 키보드 입력을 처리할 객체 준비
+    static Scanner keyIn = new Scanner(System.in);
+
     public static void main(String[] args) {
 
-        // 4) 저장할 배열을 만든다
-        String[] names = new String[100];
-        String[] emails = new String[100];
-        String[] passwords = new String[100];
+        printMembers();
+        
+        inputMembers();
 
-        int index = 0;
+        keyIn.close();
+    }
 
-        // 1) 키보드 입력을 처리할 객체 준비
-        Scanner keyIn = new Scanner(System.in);
-
+    // 6) 메소드들을 만들고 데이터들을 옮긴다
+    static void printMembers() {
         // 3) 반복문을 만든다
         while (true) {
             // 2) 사용자로부터 회원 정보 입력받기
@@ -33,10 +42,13 @@ public class App {
             if (answer.toLowerCase().equals("n"))
                 break;
         }
-        // 5) 출력을만든다
+
+    }
+
+    // 5) 출력을만든다
+    static void inputMembers() {
         for (int i = 0; i < index; i++) {
             System.out.printf("%s, %s, %s\n", names[i], emails[i], passwords[i]);
         }
-        keyIn.close();
     }
 }
