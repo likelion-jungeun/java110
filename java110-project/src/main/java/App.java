@@ -2,13 +2,11 @@ import java.util.Scanner;
 
 public class App {
 
-    // 여러 속성의 값을 관리하기 쉽도록 사용자 정의 데이터 타입을 만들어 사용한다.
     static class Member {
         protected String name;
         protected String email;
         protected String password;
 
-        // 인스턴스의 메모리를 다루는 operator=setter/geeter==accessor==property==message
         public String getName() {
             return name;
         }
@@ -67,9 +65,41 @@ public class App {
 
     }
 
-    static Student[] students = new Student[100];
+    static class Teacher extends Member {
+        protected String tel;
+        protected int pay;
+        protected String subjects;
 
-    static int index = 0;
+        public String getTel() {
+            return tel;
+        }
+
+        public void setTel(String tel) {
+            this.tel = tel;
+        }
+
+        public int getPay() {
+            return pay;
+        }
+
+        public void setPay(int pay) {
+            this.pay = pay;
+        }
+
+        public String getSubjects() {
+            return subjects;
+        }
+
+        public void setSubjects(String subjects) {
+            this.subjects = subjects;
+        }
+    }
+
+    static Student[] students = new Student[100];
+    static Teacher[] teachers = new Teacher[100];
+
+    static int studentIndex = 0; 
+    static int teacherIndex= 0; 
 
     static Scanner keyIn = new Scanner(System.in);
 
@@ -78,9 +108,11 @@ public class App {
         while (true) {
             String menu = promptMenu();
             if (menu.equals("1")) {
-
                 serviceStudentMenu();
-            } else if (menu.equals("0")) {
+            }else if(menu.equals("2")) {
+                serviceTeacherMenu();
+            }
+            else if (menu.equals("0")) {
                 System.out.println("안녕히 가세요!");
                 break;
             }
@@ -104,6 +136,23 @@ public class App {
         }
     }
 
+    
+    private static void serviceTeacherMenu() {
+        while (true) {
+            System.out.println("강사관리> ");
+            String command = keyIn.nextLine();
+            if (command.equals("list")) {
+                printTeachers();
+            } else if (command.equals("add")) {
+                inputTeachers();
+            } else if (command.equals("quit")) {
+                break;
+            } else {
+                System.out.println("유효하지 않는 명령입니다.");
+            }
+        }
+    }
+    
     private static String promptMenu() {
         System.out.println("[메뉴]");
         System.out.println("1.학생 관리");
@@ -127,20 +176,31 @@ public class App {
     }
 
     static void printStudents() {
-        int count =0;
-        for (Student s : students) { 
-            
-            if(count++ ==index) //이거 후위연산자야!!
+        int count = 0;
+        for (Student s : students) {
+
+            if (count++ == studentIndex) // 이거 후위연산자야!!
                 break;
-            //students 자리에는배열 또는 컬렉션이 올 수 있음
-            System.out.printf("%s, %s, %s, %s, %b, %s \n",
-                    s.getName(), 
-                    s.getEmail(),
-                    s.getPassword(),
-                    s.getSchool(),
-                    s.isWorking(),
-                    s.getTel());
-            
+            // students 자리에는배열 또는 컬렉션이 올 수 있음
+            System.out.printf("%s, %s, %s, %s, %b, %s \n", s.getName(), s.getEmail(), s.getPassword(), s.getSchool(),
+                    s.isWorking(), s.getTel());
+
+        }
+    }
+    
+    static void printTeachers() {
+        int count = 0;
+        for (Teacher s : teachers) {
+
+            if (count++ == teacherIndex)
+                break;
+            System.out.printf("%s, %s, %s, %s, %d, [%s] \n", 
+                                s.getName(), 
+                                s.getEmail(), 
+                                s.getPassword(), 
+                                s.getTel(),
+                                s.getPay(), 
+                                s.getSubjects());
         }
     }
 
@@ -166,8 +226,8 @@ public class App {
 
             System.out.print("전화번호 : ");
             m.setTel(keyIn.nextLine());
-            
-            students[index++] = m;
+
+            students[studentIndex++] = m;
 
             System.out.print("계속 등록하시겠습니까?(Y/n)");
             String answer = keyIn.nextLine();
@@ -176,4 +236,39 @@ public class App {
         }
 
     }
+    
+    
+    static void inputTeachers() {
+
+        while (true) {
+            Teacher m = new Teacher();
+
+            System.out.print("이름 : ");
+            m.setName(keyIn.nextLine());
+
+            System.out.print("이메일 : ");
+            m.setEmail(keyIn.nextLine());
+
+            System.out.print("암호 : ");
+            m.setPassword(keyIn.nextLine());
+
+            System.out.print("전화 : ");
+            m.setTel(keyIn.nextLine());
+
+            System.out.print("급여 : ");
+            m.setPay(Integer.parseInt(keyIn.nextLine()));
+            
+            System.out.print("강의과목(예: 자바,C,C++) : ");
+            m.setSubjects(keyIn.nextLine());
+
+            teachers[teacherIndex++] = m;
+
+            System.out.print("계속 등록하시겠습니까?(Y/n)");
+            String answer = keyIn.nextLine();
+            if (answer.toLowerCase().equals("n"))
+                break;
+        }
+
+    }
+    
 }
