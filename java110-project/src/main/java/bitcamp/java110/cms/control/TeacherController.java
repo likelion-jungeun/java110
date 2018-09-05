@@ -67,8 +67,8 @@ public class TeacherController { // 패키지클래스
 
             if (count++ == teacherIndex)
                 break;
-            System.out.printf("%s, %s, %s, %s, %d, [%s] \n", s.getName(), s.getEmail(), s.getPassword(), s.getTel(),
-                    s.getPay(), s.getSubjects());
+            System.out.printf("%d: %s, %s, %s, %s, %d, [%s] \n", count - 1, s.getName(), s.getEmail(), s.getPassword(),
+                    s.getTel(), s.getPay(), s.getSubjects());
         }
     }
 

@@ -59,8 +59,8 @@ public class ManagerController {
 
             if (count++ == managerIndex)
                 break;
-            System.out.printf("%s, %s, %s, %s, %s\n", s.getName(), s.getEmail(), s.getPassword(), s.getTel(),
-                    s.getPosition());
+            System.out.printf("%d: %s, %s, %s, %s, %s\n", count - 1, s.getName(), s.getEmail(), s.getPassword(),
+                    s.getTel(), s.getPosition());
         }
     }
 
@@ -87,7 +87,7 @@ public class ManagerController {
             if (managerIndex == managers.length) {
                 increaseStorage();
             }
-            
+
             managers[managerIndex++] = m;
 
             System.out.print("계속 등록하시겠습니까?(Y/n)");
@@ -97,7 +97,7 @@ public class ManagerController {
         }
 
     }
-    
+
     private static void increaseStorage() {
         Manager[] newList = new Manager[managers.length + 3];
         for (int i = 0; i < managers.length; i++) {

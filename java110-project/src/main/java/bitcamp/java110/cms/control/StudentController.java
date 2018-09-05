@@ -2,45 +2,12 @@ package bitcamp.java110.cms.control;
 
 import java.util.Scanner;
 
-import bitcamp.java110.cms.domain.Member;
+import bitcamp.java110.cms.dao.StudentList;
+import bitcamp.java110.cms.domain.Student;
 
 public class StudentController {
 
     public static Scanner keyIn;
-    static Student[] students = new Student[5];
-    static int studentIndex = 0;
-
-    static class Student extends Member {
-
-        protected String school;
-        protected boolean working;
-        protected String tel;
-
-        public String getSchool() {
-            return school;
-        }
-
-        public void setSchool(String school) {
-            this.school = school;
-        }
-
-        public boolean isWorking() {
-            return working;
-        }
-
-        public void setWorking(boolean working) {
-            this.working = working;
-        }
-
-        public String getTel() {
-            return tel;
-        }
-
-        public void setTel(String tel) {
-            this.tel = tel;
-        }
-
-    }
 
     public static void serviceStudentMenu() {
         while (true) {
@@ -63,79 +30,53 @@ public class StudentController {
     }
 
     private static void printStudents() {
-        int count = 0;
-        for (Student s : students) {
 
-            if (count++ == studentIndex)
-                break;
-            System.out.printf("%d: %s, %s, %s, %s, %b, %s \n", count - 1, s.getName(), s.getEmail(), s.getPassword(),
+        for (int i = 0; i < StudentList.size(); i++) {
+            Student s = StudentList.get(i);
+            System.out.printf("%d: %s, %s, %s, %s, %b, %s \n", i, s.getName(), s.getEmail(), s.getPassword(),
                     s.getSchool(), s.isWorking(), s.getTel());
-
         }
     }
 
     private static void inputStudents() {
-
         while (true) {
             Student m = new Student();
-
-            System.out.print("이름 : ");
+            System.out.print("이름? ");
             m.setName(keyIn.nextLine());
 
-            System.out.print("이메일 : ");
+            System.out.print("이메일? ");
             m.setEmail(keyIn.nextLine());
 
-            System.out.print("암호 : ");
+            System.out.print("암호? ");
             m.setPassword(keyIn.nextLine());
 
-            System.out.print("최종학력 : ");
+            System.out.print("최종학력? ");
             m.setSchool(keyIn.nextLine());
 
-            System.out.print("재직여부 :(true/false) ");
+            System.out.print("재직여부?(true/false) ");
             m.setWorking(Boolean.parseBoolean(keyIn.nextLine()));
 
-            System.out.print("전화번호 : ");
+            System.out.print("전화? ");
             m.setTel(keyIn.nextLine());
 
-            // 배열 크기 늘리기
-            if (studentIndex == students.length) {
-                increaseStorage();
-            }
-            students[studentIndex++] = m;
-
-            System.out.print("계속 등록하시겠습니까?(Y/n)");
+            StudentList.add(m);
+            System.out.println("계속 하시겠습니까?(Y/n) ");
             String answer = keyIn.nextLine();
-            if (answer.toLowerCase().equals("n"))
+            if (answer.toLowerCase().equals("n")) {
                 break;
+            }
         }
-
-    }
-
-    private static void increaseStorage() {
-        Student[] newList = new Student[students.length + 3];
-        for (int i = 0; i < students.length; i++) {
-            newList[i] = students[i];
-        }
-        students = newList;
     }
 
     private static void deleteStudent() {
         System.out.print("삭제할 번호 : ");
         int no = Integer.parseInt(keyIn.nextLine());
 
-        /*
-         * if (no >= 0 && no < studentIndex) { for (int i = no; i < studentIndex - 2;
-         * i++) { students[i] = students[i + 1]; } studentIndex--; }
-         */
-
-        if (no < 0 || no >= studentIndex) {
+        if (no < 0 || no >= StudentList.size()) {
             System.out.println("무효한 번호입니다.");
             return;
         }
-        for (int i = no; i < studentIndex - 1; i++) {
-            students[i] = students[i + 1];
-        }
-        studentIndex--;
+        StudentList.remove(no);
         System.out.println("삭제하였습니다.");
 
     }
@@ -144,33 +85,39 @@ public class StudentController {
         System.out.print("조회할 번호 : ");
         int no = Integer.parseInt(keyIn.nextLine());
 
-        if (no < 0 || no >= studentIndex) {
+        if (no < 0 || no >= StudentList.size()) {
             System.out.println("무효한 번호입니다.");
             return;
         }
-
-        System.out.printf("이름: %s\n", students[no].getName());
-        System.out.printf("이메일: %s\n", students[no].getEmail());
-        System.out.printf("암호: %s\n", students[no].getPassword());
-        System.out.printf("최종학력: %s\n", students[no].getSchool());
-        System.out.printf("전화: %s\n", students[no].getTel());
-        System.out.printf("재직여부: %b\n", students[no].isWorking());
+        Student student = StudentList.get(no);
+        System.out.printf("이름: %s\n", student.getName());
+        System.out.printf("이메일: %s\n", student.getEmail());
+        System.out.printf("암호: %s\n", student.getPassword());
+        System.out.printf("최종학력: %s\n", student.getSchool());
+        System.out.printf("전화: %s\n", student.getTel());
+        System.out.printf("재직여부: %b\n", student.isWorking());
 
     }
 
-    /*
-     * static { // 클래스가 로딩될 때 자동으로 딱 한 번 실행되는 블록! Student s = new Student();
-     * s.setName("a"); students[studentIndex++] = s;
-     * 
-     * s = new Student(); s.setName("b"); students[studentIndex++] = s;
-     * 
-     * s = new Student(); s.setName("c"); students[studentIndex++] = s;
-     * 
-     * s = new Student(); s.setName("d"); students[studentIndex++] = s;
-     * 
-     * s = new Student(); s.setName("e"); students[studentIndex++] = s;
-     * 
-     * }
-     */
+    static { // 클래스가 로딩될 때 자동으로 딱 한 번 실행되는 블록! Student s = new Student();
+        Student s = new Student();
+        s.setName("a");
+        StudentList.add(s);
 
+        s = new Student();
+        s.setName("b");
+        StudentList.add(s);
+
+        s = new Student();
+        s.setName("c");
+        StudentList.add(s);
+
+        s = new Student();
+        s.setName("d");
+        StudentList.add(s);
+
+        s = new Student();
+        s.setName("e");
+        StudentList.add(s);
+    }
 }
