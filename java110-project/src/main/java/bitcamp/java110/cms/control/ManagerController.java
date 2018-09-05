@@ -1,9 +1,10 @@
 package bitcamp.java110.cms.control;
 
 import java.util.Scanner;
-
 import bitcamp.java110.cms.dao.ManagerList;
+import bitcamp.java110.cms.dao.StudentList;
 import bitcamp.java110.cms.domain.Manager;
+import bitcamp.java110.cms.domain.Student;
 
 public class ManagerController {
 
@@ -33,7 +34,7 @@ public class ManagerController {
 
         for (int i = 0; i < ManagerList.size(); i++) {
             Manager s = ManagerList.get(i);
-            System.out.printf("%d: %s, %s, %s, %d, %s \n", i, s.getName(), s.getEmail(), s.getPassword(), s.getTel(),
+            System.out.printf("%d: %s, %s, %s, %s \n", i, s.getName(), s.getEmail(), s.getPassword(), s.getTel(),
                     s.getPosition());
         }
     }
@@ -95,6 +96,27 @@ public class ManagerController {
         System.out.printf("전화: %s\n", manager.getTel());
         System.out.printf("부서: %s\n", manager.getPassword());
 
+    }
+    static { // 클래스가 로딩될 때 자동으로 딱 한 번 실행되는 블록! Student s = new Student();
+        Manager s = new Manager();
+        s.setName("a");
+        ManagerList.add(s);
+
+        s = new Manager();
+        s.setName("b");
+        ManagerList.add(s);
+
+        s = new Manager();
+        s.setName("c");
+        ManagerList.add(s);
+
+        s = new Manager();
+        s.setName("d");
+        ManagerList.add(s);
+
+        s = new Manager();
+        s.setName("e");
+        ManagerList.add(s);
     }
 
 }

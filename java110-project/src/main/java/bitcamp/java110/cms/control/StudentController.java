@@ -41,26 +41,26 @@ public class StudentController {
     private static void inputStudents() {
         while (true) {
             Student m = new Student();
-            System.out.print("이름? ");
+            System.out.print("이름 : ");
             m.setName(keyIn.nextLine());
 
-            System.out.print("이메일? ");
+            System.out.print("이메일 : ");
             m.setEmail(keyIn.nextLine());
 
-            System.out.print("암호? ");
+            System.out.print("암호 : ");
             m.setPassword(keyIn.nextLine());
 
-            System.out.print("최종학력? ");
+            System.out.print("최종학력 : ");
             m.setSchool(keyIn.nextLine());
 
-            System.out.print("재직여부?(true/false) ");
+            System.out.print("재직여부 : (true/false) ");
             m.setWorking(Boolean.parseBoolean(keyIn.nextLine()));
 
-            System.out.print("전화? ");
+            System.out.print("전화 : ");
             m.setTel(keyIn.nextLine());
 
             StudentList.add(m);
-            System.out.println("계속 하시겠습니까?(Y/n) ");
+            System.out.println("계속 하시겠습니까: (Y/n) ");
             String answer = keyIn.nextLine();
             if (answer.toLowerCase().equals("n")) {
                 break;
