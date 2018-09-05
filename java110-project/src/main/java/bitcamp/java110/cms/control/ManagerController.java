@@ -2,36 +2,12 @@ package bitcamp.java110.cms.control;
 
 import java.util.Scanner;
 
-import bitcamp.java110.cms.control.StudentController.Student;
-import bitcamp.java110.cms.domain.Member;
+import bitcamp.java110.cms.dao.ManagerList;
+import bitcamp.java110.cms.domain.Manager;
 
 public class ManagerController {
 
-    static Manager[] managers = new Manager[100];
-    static int managerIndex = 0;
     public static Scanner keyIn;
-
-    static class Manager extends Member {
-        private String tel;
-        private String position;
-
-        public String getTel() {
-            return tel;
-        }
-
-        public void setTel(String tel) {
-            this.tel = tel;
-        }
-
-        public String getPosition() {
-            return position;
-        }
-
-        public void setPosition(String position) {
-            this.position = position;
-        }
-
-    }
 
     public static void serviceManagerMenu() {
         while (true) {
@@ -54,13 +30,11 @@ public class ManagerController {
     }
 
     private static void printManagers() {
-        int count = 0;
-        for (Manager s : managers) {
 
-            if (count++ == managerIndex)
-                break;
-            System.out.printf("%d: %s, %s, %s, %s, %s\n", count - 1, s.getName(), s.getEmail(), s.getPassword(),
-                    s.getTel(), s.getPosition());
+        for (int i = 0; i < ManagerList.size(); i++) {
+            Manager s = ManagerList.get(i);
+            System.out.printf("%d: %s, %s, %s, %d, %s \n", i, s.getName(), s.getEmail(), s.getPassword(), s.getTel(),
+                    s.getPosition());
         }
     }
 
@@ -84,12 +58,7 @@ public class ManagerController {
             System.out.print("부서 : ");
             m.setPosition(keyIn.nextLine());
 
-            if (managerIndex == managers.length) {
-                increaseStorage();
-            }
-
-            managers[managerIndex++] = m;
-
+            ManagerList.add(m);
             System.out.print("계속 등록하시겠습니까?(Y/n)");
             String answer = keyIn.nextLine();
             if (answer.toLowerCase().equals("n"))
@@ -98,26 +67,15 @@ public class ManagerController {
 
     }
 
-    private static void increaseStorage() {
-        Manager[] newList = new Manager[managers.length + 3];
-        for (int i = 0; i < managers.length; i++) {
-            newList[i] = managers[i];
-        }
-        managers = newList;
-    }
-
     private static void deleteManager() {
         System.out.print("삭제할 번호 : ");
         int no = Integer.parseInt(keyIn.nextLine());
 
-        if (no < 0 || no >= managerIndex) {
+        if (no < 0 || no >= ManagerList.size()) {
             System.out.println("무효한 번호입니다.");
             return;
         }
-        for (int i = no; i < managerIndex - 1; i++) {
-            managers[i] = managers[i + 1];
-        }
-        managerIndex--;
+        ManagerList.remove(no);
         System.out.println("삭제하였습니다.");
 
     }
@@ -126,16 +84,16 @@ public class ManagerController {
         System.out.print("조회할 번호 : ");
         int no = Integer.parseInt(keyIn.nextLine());
 
-        if (no < 0 || no >= managerIndex) {
+        if (no < 0 || no >= ManagerList.size()) {
             System.out.println("무효한 번호입니다.");
             return;
         }
-
-        System.out.printf("이름: %s\n", managers[no].getName());
-        System.out.printf("이메일: %s\n", managers[no].getEmail());
-        System.out.printf("암호: %s\n", managers[no].getPassword());
-        System.out.printf("전화: %s\n", managers[no].getTel());
-        System.out.printf("부서: %b\n", managers[no].getPosition());
+        Manager manager = ManagerList.get(no);
+        System.out.printf("이름: %s\n", manager.getName());
+        System.out.printf("이메일: %s\n", manager.getEmail());
+        System.out.printf("암호: %s\n", manager.getPassword());
+        System.out.printf("전화: %s\n", manager.getTel());
+        System.out.printf("부서: %s\n", manager.getPassword());
 
     }
 
