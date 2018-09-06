@@ -1,6 +1,6 @@
 package bitcamp.java110.cms.util;
 
-public class ArrayList<T> {//제네릭
+public class ArrayList<T> implements List<T> {// 제네릭
 
     private Object[] list = new Object[5];
     private int index = 0;
@@ -22,16 +22,20 @@ public class ArrayList<T> {//제네릭
         list = newList;
     }
 
-    public void remove(int no) {
+    public T remove(int no) {
 
         if (no < 0 || no >= index) {
-            return;
+            return null;
         }
+        @SuppressWarnings("unchecked")
+        T removedObj = (T) list[no];
+
         for (int i = no; i < index - 1; i++) {
             list[i] = list[i + 1];
         }
         index--;
 
+        return removedObj;
     }
 
     public int size() {
@@ -44,6 +48,6 @@ public class ArrayList<T> {//제네릭
         if (no < 0 || no >= index) {
             return null;
         }
-        return (T)list[no]; //얘가 경고해서 위에 SuppressWarnings써서 경고 없앰
+        return (T) list[no]; // 얘가 경고해서 위에 SuppressWarnings써서 경고 없앰
     }
 }

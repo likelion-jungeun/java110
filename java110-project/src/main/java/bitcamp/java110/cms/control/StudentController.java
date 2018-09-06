@@ -3,15 +3,17 @@ package bitcamp.java110.cms.control;
 import java.util.Scanner;
 
 import bitcamp.java110.cms.domain.Student;
-import bitcamp.java110.cms.util.LinkedList;
+import bitcamp.java110.cms.util.List;
 
 public class StudentController {
 
-    private LinkedList<Student> students = new LinkedList<>();
+    private List<Student> students;
     public Scanner keyIn;
 
-    public StudentController(Scanner keyIn) {
+    public StudentController(Scanner keyIn, List<Student> students) {
         this.keyIn = keyIn;
+        this.students = students;
+        init();
     }
 
     public void serviceStudentMenu() {
@@ -103,7 +105,7 @@ public class StudentController {
 
     }
 
-    { // static을빼서 인스턴스 블록이 됬음!! -> 인스턴스가 만들어질 때 생성자가 호출되기 전에 먼저 실행 됨.
+    private void init() {
         Student s = new Student();
         s.setName("a");
         students.add(s);
