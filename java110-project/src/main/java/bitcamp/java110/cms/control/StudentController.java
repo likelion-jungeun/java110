@@ -6,8 +6,9 @@ import bitcamp.java110.cms.util.ArrayList;
 
 public class StudentController {
 
-    private ArrayList students = new ArrayList();
+    private ArrayList<Student> students = new ArrayList<>();
     public Scanner keyIn;
+
     public StudentController(Scanner keyIn) {
         this.keyIn = keyIn;
     }
@@ -35,7 +36,7 @@ public class StudentController {
     private void printStudents() {
         System.out.println(students.size());
         for (int i = 0; i < students.size(); i++) {
-            Student s = (Student) students.get(i);
+            Student s = students.get(i);
             System.out.printf("%d: %s, %s, %s, %s, %b, %s \n", i, s.getName(), s.getEmail(), s.getPassword(),
                     s.getSchool(), s.isWorking(), s.getTel());
         }
@@ -92,7 +93,7 @@ public class StudentController {
             System.out.println("무효한 번호입니다.");
             return;
         }
-        Student student = (Student) students.get(no);
+        Student student = students.get(no);
         System.out.printf("이름: %s\n", student.getName());
         System.out.printf("이메일: %s\n", student.getEmail());
         System.out.printf("암호: %s\n", student.getPassword());
@@ -102,8 +103,7 @@ public class StudentController {
 
     }
 
-       
-     { //static을빼서 인스턴스 블록이 됬음!! -> 인스턴스가 만들어질 때 생성자가 호출되기 전에 먼저 실행 됨.
+    { // static을빼서 인스턴스 블록이 됬음!! -> 인스턴스가 만들어질 때 생성자가 호출되기 전에 먼저 실행 됨.
         Student s = new Student();
         s.setName("a");
         students.add(s);

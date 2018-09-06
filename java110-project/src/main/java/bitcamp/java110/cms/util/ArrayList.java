@@ -1,13 +1,11 @@
 package bitcamp.java110.cms.util;
 
-public class ArrayList {
+public class ArrayList<T> {//제네릭
 
-    // 개별적으로 관리해야 할 값이라면 인스턴스 변수를 사용하라!
-    // 모든 static을 떼버림.
-    Object[] list = new Object[5];
-    int index = 0;
+    private Object[] list = new Object[5];
+    private int index = 0;
 
-    public void add(Object obj) {
+    public void add(T obj) {
 
         if (index == list.length) {
             increaseStorage();
@@ -41,10 +39,11 @@ public class ArrayList {
         // this가 생략되어 있음!-> this값은 내가 size를 호출할 때 어떤 인스턴스 값을 넣느냐에 따라 바뀜
     }
 
-    public Object get(int no) {
+    @SuppressWarnings("unchecked")
+    public T get(int no) {
         if (no < 0 || no >= index) {
             return null;
         }
-        return list[no];
+        return (T)list[no]; //얘가 경고해서 위에 SuppressWarnings써서 경고 없앰
     }
 }

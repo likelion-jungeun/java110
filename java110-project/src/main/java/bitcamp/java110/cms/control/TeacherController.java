@@ -7,7 +7,7 @@ import bitcamp.java110.cms.util.ArrayList;
 
 public class TeacherController { // 패키지클래스
 
-    private ArrayList teachers = new ArrayList();
+    private ArrayList<Teacher> teachers = new ArrayList<>();
     public Scanner keyIn;
     public TeacherController(Scanner keyIn) {
         this.keyIn = keyIn;
@@ -36,7 +36,7 @@ public class TeacherController { // 패키지클래스
     private void printTeachers() {
 
         for (int i = 0; i < teachers.size(); i++) {
-            Teacher s = (Teacher) teachers.get(i);
+            Teacher s = teachers.get(i);
             System.out.printf("%d: %s, %s, %s, %s, %d, %s \n", i, s.getName(), s.getEmail(), s.getPassword(),
                     s.getTel(), s.getPay(), s.getSubjects());
         }
@@ -72,7 +72,6 @@ public class TeacherController { // 패키지클래스
             if (answer.toLowerCase().equals("n"))
                 break;
         }
-
     }
 
     private void deleteTeacher() {
@@ -96,26 +95,11 @@ public class TeacherController { // 패키지클래스
             System.out.println("무효한 번호입니다.");
             return;
         }
-        Teacher teacher = (Teacher) teachers.get(no);
+        Teacher teacher = teachers.get(no);
         System.out.printf("이름: %s\n", teacher.getName());
         System.out.printf("이메일: %s\n", teacher.getEmail());
         System.out.printf("암호: %s\n", teacher.getPassword());
         System.out.printf("전화: %s\n", teacher.getTel());
         System.out.printf("급여: %d\n", teacher.getPay());
-
     }
-
-    /*
-     * { // 클래스가 로딩될 때 자동으로 딱 한 번 실행되는 블록! Teacher s = new Teacher(); Teacher
-     * s = new Teacher(); s.setName("a"); teachers.add(s);
-     * 
-     * s = new Teacher(); s.setName("b"); teachers.add(s);
-     * 
-     * s = new Teacher(); s.setName("c"); teachers.add(s);
-     * 
-     * s = new Teacher(); s.setName("d"); teachers.add(s);
-     * 
-     * s = new Teacher(); s.setName("e"); teachers.add(s); }
-     */
-
 }
