@@ -1,12 +1,13 @@
 package bitcamp.java110.cms.control;
 
 import java.util.Scanner;
+
 import bitcamp.java110.cms.domain.Student;
-import bitcamp.java110.cms.util.ArrayList;
+import bitcamp.java110.cms.util.LinkedList;
 
 public class StudentController {
 
-    private ArrayList<Student> students = new ArrayList<>();
+    private LinkedList<Student> students = new LinkedList<>();
     public Scanner keyIn;
 
     public StudentController(Scanner keyIn) {
@@ -34,7 +35,6 @@ public class StudentController {
     }
 
     private void printStudents() {
-        System.out.println(students.size());
         for (int i = 0; i < students.size(); i++) {
             Student s = students.get(i);
             System.out.printf("%d: %s, %s, %s, %s, %b, %s \n", i, s.getName(), s.getEmail(), s.getPassword(),

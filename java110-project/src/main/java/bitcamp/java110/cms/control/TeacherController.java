@@ -1,14 +1,14 @@
 package bitcamp.java110.cms.control;
 
 import java.util.Scanner;
-
 import bitcamp.java110.cms.domain.Teacher;
-import bitcamp.java110.cms.util.ArrayList;
+import bitcamp.java110.cms.util.LinkedList;
 
 public class TeacherController { // 패키지클래스
 
-    private ArrayList<Teacher> teachers = new ArrayList<>();
+    private LinkedList<Teacher> teachers = new LinkedList<>();
     public Scanner keyIn;
+
     public TeacherController(Scanner keyIn) {
         this.keyIn = keyIn;
     }
