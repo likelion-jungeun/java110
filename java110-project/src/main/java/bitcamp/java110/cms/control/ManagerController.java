@@ -1,16 +1,19 @@
 package bitcamp.java110.cms.control;
 
 import java.util.Scanner;
-import bitcamp.java110.cms.dao.ManagerList;
-import bitcamp.java110.cms.dao.StudentList;
+
 import bitcamp.java110.cms.domain.Manager;
-import bitcamp.java110.cms.domain.Student;
+import bitcamp.java110.cms.util.ArrayList;
 
 public class ManagerController {
 
-    public static Scanner keyIn;
+    private ArrayList managers = new ArrayList();
+    public Scanner keyIn;
+    public ManagerController(Scanner keyIn) {
+        this.keyIn=keyIn;
+    }
 
-    public static void serviceManagerMenu() {
+    public void serviceManagerMenu() {
         while (true) {
             System.out.println("매니저관리> ");
             String command = keyIn.nextLine();
@@ -30,16 +33,16 @@ public class ManagerController {
         }
     }
 
-    private static void printManagers() {
+    private void printManagers() {
 
-        for (int i = 0; i < ManagerList.size(); i++) {
-            Manager s = ManagerList.get(i);
+        for (int i = 0; i < managers.size(); i++) {
+            Manager s = (Manager) managers.get(i);
             System.out.printf("%d: %s, %s, %s, %s \n", i, s.getName(), s.getEmail(), s.getPassword(), s.getTel(),
                     s.getPosition());
         }
     }
 
-    private static void inputManagers() {
+    private void inputManagers() {
 
         while (true) {
             Manager m = new Manager();
@@ -59,7 +62,7 @@ public class ManagerController {
             System.out.print("부서 : ");
             m.setPosition(keyIn.nextLine());
 
-            ManagerList.add(m);
+            managers.add(m);
             System.out.print("계속 등록하시겠습니까?(Y/n)");
             String answer = keyIn.nextLine();
             if (answer.toLowerCase().equals("n"))
@@ -68,28 +71,28 @@ public class ManagerController {
 
     }
 
-    private static void deleteManager() {
+    private void deleteManager() {
         System.out.print("삭제할 번호 : ");
         int no = Integer.parseInt(keyIn.nextLine());
 
-        if (no < 0 || no >= ManagerList.size()) {
+        if (no < 0 || no >= managers.size()) {
             System.out.println("무효한 번호입니다.");
             return;
         }
-        ManagerList.remove(no);
+        managers.remove(no);
         System.out.println("삭제하였습니다.");
 
     }
 
-    private static void detailManager() {
+    private void detailManager() {
         System.out.print("조회할 번호 : ");
         int no = Integer.parseInt(keyIn.nextLine());
 
-        if (no < 0 || no >= ManagerList.size()) {
+        if (no < 0 || no >= managers.size()) {
             System.out.println("무효한 번호입니다.");
             return;
         }
-        Manager manager = ManagerList.get(no);
+        Manager manager = (Manager) managers.get(no);
         System.out.printf("이름: %s\n", manager.getName());
         System.out.printf("이메일: %s\n", manager.getEmail());
         System.out.printf("암호: %s\n", manager.getPassword());
@@ -97,26 +100,12 @@ public class ManagerController {
         System.out.printf("부서: %s\n", manager.getPassword());
 
     }
-    static { // 클래스가 로딩될 때 자동으로 딱 한 번 실행되는 블록! Student s = new Student();
-        Manager s = new Manager();
-        s.setName("a");
-        ManagerList.add(s);
 
-        s = new Manager();
-        s.setName("b");
-        ManagerList.add(s);
-
-        s = new Manager();
-        s.setName("c");
-        ManagerList.add(s);
-
-        s = new Manager();
-        s.setName("d");
-        ManagerList.add(s);
-
-        s = new Manager();
-        s.setName("e");
-        ManagerList.add(s);
-    }
+    /*
+     * {s = new Manager(); s.setName("a"); managers.add(s); s = new Manager();
+     * s.setName("b"); managers.add(s); s = new Manager(); s.setName("c");
+     * managers.add(s); s = new Manager(); s.setName("d"); managers.add(s); s = new
+     * Manager(); s.setName("e"); managers.add(s); }
+     */
 
 }
