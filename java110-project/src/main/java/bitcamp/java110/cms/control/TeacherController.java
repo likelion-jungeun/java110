@@ -1,5 +1,6 @@
 package bitcamp.java110.cms.control;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -7,12 +8,9 @@ import bitcamp.java110.cms.domain.Teacher;
 
 public class TeacherController implements Controller {
 
-    private List<Teacher> teachers;
+    public String name="2";
+    private List<Teacher> teachers = new ArrayList<>();
 
-    public TeacherController(List<Teacher> teachers) {
-
-        this.teachers = teachers;
-    }
 
     // 넘겨주는 값 : 아규먼트 , 넘겨받는 값 : 파라미터
     public void service(Scanner keyIn) {// 파라미터
