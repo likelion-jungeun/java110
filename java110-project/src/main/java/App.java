@@ -4,7 +4,7 @@ import bitcamp.java110.cms.context.ApplicationContext;
 import bitcamp.java110.cms.control.Controller;
 
 public class App {
-
+    
     static Scanner keyIn = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
