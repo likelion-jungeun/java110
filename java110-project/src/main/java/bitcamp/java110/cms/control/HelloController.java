@@ -3,12 +3,14 @@ package bitcamp.java110.cms.control;
 import java.util.Scanner;
 
 import bitcamp.java110.cms.annotation.Component;
+import bitcamp.java110.cms.annotation.RequestMapping;
 
-@Component("4")//이름이 value일 경우, value 생략가능.(기존에 쓴 것은 value="4"였는데 생략했음)
-public class HelloController implements Controller {
+@Component("hello")
+public class HelloController{
 
-    @Override
-    public void service(Scanner keyIn) {
+  //메소드 이름이 상관없다는 것을 보여주기 위해서 원래 service 였던 것을 클래스마다 teacher, student..등으로 바꿈
+    @RequestMapping
+    public void hello(Scanner keyIn) {
         System.out.println("안녕하세요!!!");
 
     }
