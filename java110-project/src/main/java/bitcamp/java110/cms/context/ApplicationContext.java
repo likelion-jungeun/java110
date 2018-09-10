@@ -3,6 +3,7 @@ package bitcamp.java110.cms.context;
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
+import java.util.Set;
 
 import org.apache.ibatis.io.Resources;
 
@@ -14,7 +15,6 @@ public class ApplicationContext {
 
     public ApplicationContext(String packageName) throws Exception {
 
-       
         // 패키지 이름을 파일 경로로 바꾼다.
         String path = packageName.replace(".", "/");
 
@@ -36,8 +36,14 @@ public class ApplicationContext {
         return objPool.get(name);
     }
 
-    // file은 디렉토리정보와 file정보 모두 갖고있음. 그래서 파일뿐만아니라 디렉토리가나옴. 그럼 디렉토리 안을 또 검색해야함
-    // 그런식으로하면 메소드를 계쏙만들게 됨. 그게 싫어서 '재귀호출'을 할거임
+    public String[] getBeanDefinitionNames() {
+        Set<String> keySet = objPool.keySet();
+        String[] names = new String[keySet.size()];
+        keySet.toArray(names);
+        return names;
+
+    }
+
     private void findClass(File path, String packagePath) throws Exception {
         File[] files = path.listFiles();
         for (File file : files) {
@@ -65,13 +71,19 @@ public class ApplicationContext {
                     Object instance = constructor.newInstance();// 객체 주소를 리턴함
 
                     // => 클래스에서 Component 애노테이션을 추출한다.
-                    Component anno = clazz.getAnnotation(Component.class); //.class는 파일 확장자 x/변수명o
-                
+                    Component anno = clazz.getAnnotation(Component.class); // .class는 파일 확장자 x/변수명o
 
-                    //System.out.println(clazz.getName() + "==> " + name);
+                    // System.out.println(clazz.getName() + "==> " + name);
 
-                    // => Component 애노테이션 value값으로 인스턴스를 objPool에 저장한다.
-                    objPool.put(anno.value(), instance);
+                    // => Component 애너테이션이 value 값이 있으면, 그 값으로 객체를 저장
+                    // 없으면, 클래스 이름으로 객체를 저장한다.
+                    if (anno.value().length() > 0) {
+                        // => Component 애노테이션 value값으로 인스턴스를 objPool에 저장한다.
+                        objPool.put(anno.value(), instance);
+                    } else {
+                        objPool.put(clazz.getName(), instance);
+                    }
+
                 } catch (Exception e) {
                     System.out.printf("%s 클래스는 기본생성자가 없습니다. \n", clazz.getName());
                 }
