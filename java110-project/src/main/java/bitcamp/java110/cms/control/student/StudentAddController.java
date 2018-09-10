@@ -1,7 +1,6 @@
 package bitcamp.java110.cms.control.student;
 
 import java.util.Scanner;
-
 import bitcamp.java110.cms.App;
 import bitcamp.java110.cms.annotation.Component;
 import bitcamp.java110.cms.annotation.RequestMapping;
@@ -32,7 +31,11 @@ public class StudentAddController {
             System.out.print("전화 : ");
             m.setTel(keyIn.nextLine());
 
-            App.students.add(m);
+            if (App.studentDAO.insert(m) > 0) {
+                System.out.println("저장하였습니다.");
+            } else {
+                System.out.println("같은 이메일의 학생이 존재합니다.");
+            }
             System.out.println("계속 하시겠습니까: (Y/n) ");
             String answer = keyIn.nextLine();
             if (answer.toLowerCase().equals("n")) {
@@ -44,22 +47,27 @@ public class StudentAddController {
     {
         Student s = new Student();
         s.setName("a");
-        App.students.add(s);
+        s.setEmail("a@test.com");
+        App.studentDAO.insert(s);
 
         s = new Student();
         s.setName("b");
-        App.students.add(s);
+        s.setEmail("b@test.com");
+        App.studentDAO.insert(s);
 
         s = new Student();
         s.setName("c");
-        App.students.add(s);
+        s.setEmail("c@test.com");
+        App.studentDAO.insert(s);
 
         s = new Student();
         s.setName("d");
-        App.students.add(s);
+        s.setEmail("d@test.com");
+        App.studentDAO.insert(s);
 
         s = new Student();
         s.setName("e");
-        App.students.add(s);
+        s.setEmail("e@test.com");
+        App.studentDAO.insert(s);
     }
 }
