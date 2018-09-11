@@ -5,20 +5,14 @@ import java.util.Scanner;
 import bitcamp.java110.cms.context.ApplicationContext;
 import bitcamp.java110.cms.context.RequestMappingHandlerMapping;
 import bitcamp.java110.cms.context.RequestMappingHandlerMapping.RequestMappingHandler;
-import bitcamp.java110.cms.dao.ManagerDAO;
-import bitcamp.java110.cms.dao.StudentDAO;
-import bitcamp.java110.cms.dao.TeacherDAO;
 
 public class App {
 
-    public static StudentDAO studentDAO = new StudentDAO();
-    public static ManagerDAO managerDAO = new ManagerDAO();
-    public static TeacherDAO teacherDAO = new TeacherDAO();
     static Scanner keyIn = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
 
-        ApplicationContext iocContainer = new ApplicationContext("bitcamp.java110.cms.control");
+        ApplicationContext iocContainer = new ApplicationContext("bitcamp.java110.cms");
 
         RequestMappingHandlerMapping requestHandlerMap = new RequestMappingHandlerMapping();
         // => IoC 컨테이너에 보관된 객체의 이름목록을 가져온다.

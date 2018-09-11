@@ -2,19 +2,27 @@ package bitcamp.java110.cms.control.manager;
 
 import java.util.Scanner;
 
-import bitcamp.java110.cms.App;
+import bitcamp.java110.cms.annotation.Autowired;
 import bitcamp.java110.cms.annotation.Component;
 import bitcamp.java110.cms.annotation.RequestMapping;
+import bitcamp.java110.cms.dao.ManagerDAO;
 import bitcamp.java110.cms.domain.Manager;
 
 @Component
 public class ManagerDetailController {
 
+    ManagerDAO managerDAO;
+
+    @Autowired
+    public void setManagerDAO(ManagerDAO managerDAO) {
+        this.managerDAO = managerDAO;
+    }
+
     @RequestMapping("manager/detail")
     public void detail(Scanner keyIn) {
         System.out.print("조회할 학생의 이메일 : ");
         String email = keyIn.nextLine();
-        Manager manager = App.managerDAO.findByEmail(email);
+        Manager manager = managerDAO.findByEmail(email);
 
         if (manager == null) {
             System.out.println("해당 이메일의 학생 정보가 없습니다.");

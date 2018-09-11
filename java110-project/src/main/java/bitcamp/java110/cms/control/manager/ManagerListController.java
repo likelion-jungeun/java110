@@ -3,18 +3,26 @@ package bitcamp.java110.cms.control.manager;
 import java.util.List;
 import java.util.Scanner;
 
-import bitcamp.java110.cms.App;
+import bitcamp.java110.cms.annotation.Autowired;
 import bitcamp.java110.cms.annotation.Component;
 import bitcamp.java110.cms.annotation.RequestMapping;
+import bitcamp.java110.cms.dao.ManagerDAO;
 import bitcamp.java110.cms.domain.Manager;
 
 @Component
 public class ManagerListController {
 
+    ManagerDAO managerDAO;
+
+    @Autowired
+    public void setManagerDAO(ManagerDAO managerDAO) {
+        this.managerDAO = managerDAO;
+    }
+
     @RequestMapping("manager/list")
     public void list(Scanner keyIn) {
 
-        List<Manager> list = App.managerDAO.findAll();
+        List<Manager> list = managerDAO.findAll();
 
         for (Manager m : list)
             System.out.printf("%s, %s, %s, %s \n", m.getName(), m.getEmail(), m.getPassword(), m.getTel(),

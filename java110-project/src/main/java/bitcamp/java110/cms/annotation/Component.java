@@ -1,7 +1,9 @@
 package bitcamp.java110.cms.annotation;
 
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /*애노테이션 유지 정책 3가지 (유지정책의 default값은 CLASS임!!)
  * CLASS : 컴파일을 한 후 .class에 남겨둔다. 단, 실행할 때는 참조할 수 없다. 
@@ -11,6 +13,7 @@ import java.lang.annotation.RetentionPolicy;
  *          -> Reflection API로 클래스에서 애노테이션 정보를 추출할 수 있다는 의미.
  */
 
+@Target(ElementType.TYPE) //target은 애노테이션을 지정할?곳에 대한 제약을 줌
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Component {
     // 일반적으로 메소드는 동사로 작성.(애노테이션에는 명사로) => 필드명을 가진 프라퍼티(getter, setter같은것)
