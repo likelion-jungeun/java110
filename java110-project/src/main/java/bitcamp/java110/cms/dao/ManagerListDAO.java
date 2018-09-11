@@ -2,31 +2,32 @@ package bitcamp.java110.cms.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-import bitcamp.java110.cms.domain.Student;
+
+import bitcamp.java110.cms.domain.Manager;
 
 //@Component
-public class StudentListDAO implements StudentDAO {
+public class ManagerListDAO implements ManagerDAO{
 
-    private List<Student> list = new ArrayList<>();
+    private List<Manager> list = new ArrayList<>();
 
-    public int insert(Student student) {
-        for (Student item : list) {
-            if (item.getEmail().equals(student.getEmail())) {
+    public int insert(Manager manager) {
+        for (Manager item : list) {
+            if (item.getEmail().equals(manager.getEmail())) {
                 return 0;
             }
         }
-        list.add(student);
+        list.add(manager);
         return 1;
     }
 
-    public List<Student> findAll() {
+    public List<Manager> findAll() {
 
         return list;
     }
 
     // 이제 번호가 아닌, 이메일로 찾고 삭제할거임
-    public Student findByEmail(String email) {
-        for (Student item : list) {
+    public Manager findByEmail(String email) {
+        for (Manager item : list) {
             if (item.getEmail().equals(email)) {
                 return item;
             }
@@ -35,7 +36,7 @@ public class StudentListDAO implements StudentDAO {
     }
 
     public int delete(String email) {
-        for (Student item : list) {
+        for (Manager item : list) {
             if (item.getEmail().equals(email)) {
                 list.remove(item);
                 return 1;
