@@ -4,10 +4,10 @@ import java.lang.reflect.Method;
 import java.util.Collection;
 
 import bitcamp.java110.cms.annotation.Autowired;
+import bitcamp.java110.cms.annotation.Component;
 
-//autowiredAnnotatin을 처리할건데 bean이 생성된 후에 처리할 놈이다!
-
-public class AutowiredAnnotaionBeanPostProcessor {
+@Component
+public class AutowiredAnnotaionBeanPostProcessor implements BeanPostProcessor {
 
     ApplicationContext beanContainer;
 
