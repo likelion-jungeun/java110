@@ -1,32 +1,35 @@
-package bitcamp.java110.cms.dao;
+package bitcamp.java110.cms.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import bitcamp.java110.cms.domain.Student;
 
-//@Component
-public class StudentListDAO implements StudentDAO {
+import bitcamp.java110.cms.annotation.Component;
+import bitcamp.java110.cms.domain.Teacher;
 
-    private List<Student> list = new ArrayList<>();
 
-    public int insert(Student student) {
-        for (Student item : list) {
-            if (item.getEmail().equals(student.getEmail())) {
+@Component
+public class TeacherListDAO {
+
+    private List<Teacher> list = new ArrayList<>();
+
+    public int insert(Teacher teacher) {
+        for (Teacher item : list) {
+            if (item.getEmail().equals(teacher.getEmail())) {
                 return 0;
             }
         }
-        list.add(student);
+        list.add(teacher);
         return 1;
     }
 
-    public List<Student> findAll() {
+    public List<Teacher> findAll() {
 
         return list;
     }
 
     // 이제 번호가 아닌, 이메일로 찾고 삭제할거임
-    public Student findByEmail(String email) {
-        for (Student item : list) {
+    public Teacher findByEmail(String email) {
+        for (Teacher item : list) {
             if (item.getEmail().equals(email)) {
                 return item;
             }
@@ -35,7 +38,7 @@ public class StudentListDAO implements StudentDAO {
     }
 
     public int delete(String email) {
-        for (Student item : list) {
+        for (Teacher item : list) {
             if (item.getEmail().equals(email)) {
                 list.remove(item);
                 return 1;

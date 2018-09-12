@@ -1,4 +1,4 @@
-package bitcamp.java110.cms.dao;
+package bitcamp.java110.cms.dao.impl;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -9,28 +9,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bitcamp.java110.cms.annotation.Component;
-import bitcamp.java110.cms.domain.Manager;
+import bitcamp.java110.cms.dao.StudentDAO;
+import bitcamp.java110.cms.domain.Student;
 
 @Component
-public class ManagerFileDAO implements ManagerDAO {
+public class StudentFileDAO implements StudentDAO {
+    private List<Student> list = new ArrayList<>();
 
-    private List<Manager> list = new ArrayList<>();
-
-    public ManagerFileDAO() {
-        File dataFile = new File("data/manager.dat");
+    public StudentFileDAO() {
+        File dataFile = new File("data/student.dat");
         try (BufferedReader in = new BufferedReader(new FileReader(dataFile))) {
             while (true) {
                 String line = in.readLine();
                 if (line == null)
                     break;
                 String[] values = line.split(",");
-                Manager m = new Manager();
-                m.setEmail(values[0]);
-                m.setName(values[1]);
-                m.setPassword(values[2]);
-                m.setTel(values[3]);
-                m.setPosition(values[4]);
-                list.add(m);
+                Student s = new Student();
+                s.setEmail(values[0]);
+                s.setName(values[1]);
+                s.setPassword(values[2]);
+                s.setSchool(values[3]);
+                s.setTel(values[4]);
+                s.setWorking(Boolean.parseBoolean(values[5]));
+                list.add(s);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -38,11 +39,11 @@ public class ManagerFileDAO implements ManagerDAO {
     }
 
     private void save() {
-        File dataFile = new File("data/manager.dat");
+        File dataFile = new File("data/student.dat");
         try (BufferedWriter out = new BufferedWriter(new FileWriter(dataFile))) {
-            for (Manager m : list) {
-                out.write(String.format("%s,%s,%s,%s,%s\n", m.getEmail(), m.getName(), m.getPassword(), m.getTel(),
-                        m.getPosition()));
+            for (Student s : list) {
+                out.write(String.format("%s,%s,%s,%s,%s,%b\n", s.getEmail(), s.getName(), s.getPassword(),
+                        s.getSchool(), s.getTel(), s.isWorking()));
             }
             out.flush();
         } catch (Exception e) {
@@ -50,24 +51,23 @@ public class ManagerFileDAO implements ManagerDAO {
         }
     }
 
-    public int insert(Manager manager) {
-        for (Manager item : list) {
-            if (item.getEmail().equals(manager.getEmail())) {
+    public int insert(Student student) {
+        for (Student item : list) {
+            if (item.getEmail().equals(student.getEmail())) {
                 return 0;
             }
         }
-        list.add(manager);
+        list.add(student);
         save();
         return 1;
     }
 
-    public List<Manager> findAll() {
-
+    public List<Student> findAll() {
         return list;
     }
 
-    public Manager findByEmail(String email) {
-        for (Manager item : list) {
+    public Student findByEmail(String email) {
+        for (Student item : list) {
             if (item.getEmail().equals(email)) {
                 return item;
             }
@@ -76,7 +76,7 @@ public class ManagerFileDAO implements ManagerDAO {
     }
 
     public int delete(String email) {
-        for (Manager item : list) {
+        for (Student item : list) {
             if (item.getEmail().equals(email)) {
                 list.remove(item);
                 return 1;
