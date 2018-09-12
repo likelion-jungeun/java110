@@ -40,10 +40,15 @@ public class ManagerAddController {
             System.out.print("부서 : ");
             m.setPosition(keyIn.nextLine());
 
-            if (managerDAO.insert(m) > 0) {
+            int rtval = 0;
+            if ((rtval = managerDAO.insert(m)) > 0) {
                 System.out.println("저장하였습니다.");
+            } else if (rtval == -1) {
+                System.out.println("필수 입력 항목이 비어있습니다.");
+            } else if (rtval == -2) {
+                System.out.println("같은 이메일의 매니저가 존재합니다.");
             } else {
-                System.out.println("같은 이메일의 학생이 존재합니다.");
+                System.out.println("예기치 않은 오류가 발생했습니다!");
             }
             System.out.print("계속 등록하시겠습니까?(Y/n)");
             String answer = keyIn.nextLine();

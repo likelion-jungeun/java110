@@ -66,9 +66,20 @@ public class ManagerFile2DAO implements ManagerDAO {
     }
 
     public int insert(Manager manager) {
+        // 필수 입력 항목이 비었을 경우
+        if (manager.getName().length() == 0 
+                || manager.getEmail().length() == 0
+                || manager.getPassword().length() == 0) {
+            // 예외처리 문법이 없던 시절에는, 리턴값으로 예외 상황을 호출자에게 알렸다.
+            return -1;
+
+        }
         for (Manager item : list) {
             if (item.getEmail().equals(manager.getEmail())) {
-                return 0;
+
+                // 이메일이 중복될 경우
+                // 예외처리 문법이 없던 시절에는, 리턴값으로 예외 상황을 호출자에게 알렸다.
+                return -2;
             }
         }
         list.add(manager);
