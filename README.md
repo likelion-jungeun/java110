@@ -1,11 +1,21 @@
 # java110
 비트캠프 **자바 110기** 실습 프로젝트
 
+## v2.2 - 180913
+
+- ?.?
+-
+
 ## v2.1 - 180912
 
 - 객체 Serialize/Deserialize 적용
 - java.io.Serializable 인터페이스 활용
 - transient modifier 사용법
+
+## v2.0.1 - 180912
+
+- 인터페이스와 구현체를 별도의 패키지로 분리하기
+
 
 ## v2.0 - 180911
 
