@@ -38,7 +38,13 @@ public class App {
                 System.out.println("해당 메뉴가 없습니다.");
                 continue;
             }
-            mapping.getMethod().invoke(mapping.getInstance(), keyIn);
+
+            try {
+                mapping.getMethod().invoke(mapping.getInstance(), keyIn);
+            } catch (Exception e) {
+                System.out.println("실행 오류!!");
+                System.out.println(e.getCause());
+            }
         }
         keyIn.close();
     }

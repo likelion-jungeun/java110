@@ -22,31 +22,27 @@ public class TeacherAddController {
     public void add(Scanner keyIn) {
 
         while (true) {
-            Teacher m = new Teacher();
+            Teacher t = new Teacher();
 
             System.out.print("이름 : ");
-            m.setName(keyIn.nextLine());
+            t.setName(keyIn.nextLine());
 
             System.out.print("이메일 : ");
-            m.setEmail(keyIn.nextLine());
+            t.setEmail(keyIn.nextLine());
 
             System.out.print("암호 : ");
-            m.setPassword(keyIn.nextLine());
+            t.setPassword(keyIn.nextLine());
 
             System.out.print("전화 : ");
-            m.setTel(keyIn.nextLine());
+            t.setTel(keyIn.nextLine());
 
             System.out.print("급여 : ");
-            m.setPay(Integer.parseInt(keyIn.nextLine()));
+            t.setPay(Integer.parseInt(keyIn.nextLine()));
 
             System.out.print("강의과목(예: JAVA,C,C++) : ");
-            m.setSubjects(keyIn.nextLine());
+            t.setSubjects(keyIn.nextLine());
 
-            if (teacherDAO.insert(m) > 0) {
-                System.out.println("저장하였습니다.");
-            } else {
-                System.out.println("같은 이메일의 학생이 존재합니다.");
-            }
+            teacherDAO.insert(t);
 
             System.out.print("계속 등록하시겠습니까?(Y/n)");
             String answer = keyIn.nextLine();
