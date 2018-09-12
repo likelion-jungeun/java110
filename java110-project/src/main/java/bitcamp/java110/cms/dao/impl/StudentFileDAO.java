@@ -8,11 +8,10 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import bitcamp.java110.cms.annotation.Component;
 import bitcamp.java110.cms.dao.StudentDAO;
 import bitcamp.java110.cms.domain.Student;
 
-@Component
+//@Component
 public class StudentFileDAO implements StudentDAO {
     private List<Student> list = new ArrayList<>();
 

@@ -7,7 +7,7 @@ public class Member implements Serializable {
     private static final long serialVersionUID = 1L;
     protected String name;
     protected String email;
-    protected String password;
+    protected transient String password;// transient를 붙여서 Serialize 대상에서 제외됨
 
     public String getName() {
         return name;

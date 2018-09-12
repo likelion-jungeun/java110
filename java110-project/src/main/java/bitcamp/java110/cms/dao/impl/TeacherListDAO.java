@@ -3,11 +3,10 @@ package bitcamp.java110.cms.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import bitcamp.java110.cms.annotation.Component;
 import bitcamp.java110.cms.domain.Teacher;
 
 
-@Component
+//@Component
 public class TeacherListDAO {
 
     private List<Teacher> list = new ArrayList<>();
