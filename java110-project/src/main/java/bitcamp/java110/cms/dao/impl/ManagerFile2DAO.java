@@ -10,13 +10,12 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import bitcamp.java110.cms.annotation.Component;
 import bitcamp.java110.cms.dao.DuplicationDAOException;
 import bitcamp.java110.cms.dao.ManagerDAO;
 import bitcamp.java110.cms.dao.MandatoryValueDAOException;
 import bitcamp.java110.cms.domain.Manager;
 
-@Component
+//@Component
 public class ManagerFile2DAO implements ManagerDAO {
 
     static String defaultFilename = "data/manager2.dat";
