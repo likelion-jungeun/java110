@@ -11,6 +11,8 @@ public interface ManagerDAO {
     List<Manager> findAll();
 
     Manager findByEmail(String email);
+    default Manager findByNo(int no) {return null;}
+    default int delete(String email){ return 0;}
 
-    int delete(String email);
+    default int deleteByNo(int no){ return 0;}
 }

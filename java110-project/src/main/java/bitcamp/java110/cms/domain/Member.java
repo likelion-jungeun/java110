@@ -5,9 +5,18 @@ import java.io.Serializable;
 public class Member implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    protected int no;
     protected String name;
     protected String email;
-    protected transient String password;// transient를 붙여서 Serialize 대상에서 제외됨
+    protected String password;
+
+    public int getNo() {
+        return no;
+    }
+
+    public void setNo(int no) {
+        this.no = no;
+    }
 
     public String getName() {
         return name;
