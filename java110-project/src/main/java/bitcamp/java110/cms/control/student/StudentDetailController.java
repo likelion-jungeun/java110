@@ -20,12 +20,12 @@ public class StudentDetailController {
 
     @RequestMapping("student/detail")
     public void detail(Scanner keyIn) {
-        System.out.print("조회할 학생의 이메일 : ");
-        String email = keyIn.nextLine();
-        Student student = studentDAO.findByEmail(email);
+        System.out.print("조회할 학생 번호 : ");
+        int no = Integer.parseInt(keyIn.nextLine());
+        Student student = studentDAO.findByNo(no);
 
         if (student == null) {
-            System.out.println("해당 이메일의 학생 정보가 없습니다.");
+            System.out.println("해당 번호의 학생 정보가 없습니다.");
             return;
         }
         System.out.printf("이름: %s\n", student.getName());

@@ -23,7 +23,7 @@ public class StudentListController {
         List<Student> list = studentDAO.findAll();
 
         for (Student s : list) {
-            System.out.printf("%s, %s, %s, %s, %b, %s \n", s.getName(), s.getEmail(), s.getPassword(), s.getSchool(),
+            System.out.printf("%d, %s, %s, %s, %s, %b, %s \n", s.getNo(), s.getName(), s.getEmail(), s.getPassword(), s.getSchool(),
                     s.isWorking(), s.getTel());
         }
     }

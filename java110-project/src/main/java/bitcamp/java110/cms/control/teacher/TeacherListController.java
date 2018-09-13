@@ -22,7 +22,7 @@ public class TeacherListController {
     public void list(Scanner keyIn) {
         List<Teacher> list = teacherDAO.findAll();
         for (Teacher t : list) {
-            System.out.printf("%s, %s, %s, %s, %d, %s \n", t.getName(), t.getEmail(), t.getPassword(), t.getTel(),
+            System.out.printf("%d %s, %s, %s, %s, %d, %s \n", t.getNo(), t.getName(), t.getEmail(), t.getPassword(), t.getTel(),
                     t.getPay(), t.getSubjects());
         }
     }

@@ -85,7 +85,7 @@ public class ManagerJdbcDAO implements ManagerDAO {
             stmt = con.createStatement();
             // => select 질의를 한다.
 
-            rs = stmt.executeQuery("select" + " m.mno," + " m.name," + " m.email," + " mr.posi" + " from p1_mgr mr"
+            rs = stmt.executeQuery("select" + " m.mno," + " m.name," + " m.email," + " m.tel," + " mr.posi" + " from p1_mgr mr"
                     + " inner join p1_memb m on mr.mrno = m.mno");
 
             // 서버에 생성된 질의 결과를 한 개씩 가져온다.
@@ -95,6 +95,7 @@ public class ManagerJdbcDAO implements ManagerDAO {
                 mgr.setNo(rs.getInt("mno"));
                 mgr.setEmail(rs.getString("email"));
                 mgr.setName(rs.getString("name"));
+                mgr.setTel(rs.getString("tel"));
                 mgr.setPosition(rs.getString("posi"));
 
                 list.add(mgr);
