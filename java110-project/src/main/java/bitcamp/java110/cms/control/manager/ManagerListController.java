@@ -1,7 +1,7 @@
 package bitcamp.java110.cms.control.manager;
 
+import java.io.PrintStream;
 import java.util.List;
-import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,14 +21,14 @@ public class ManagerListController {
     }
 
     @RequestMapping("manager/list")
-    public void list(Scanner keyIn) {
+    public void list(PrintStream out) {
         List<Manager> list = managerDao.findAll();
-        for (Manager s : list) {
-            System.out.printf("%d, %s, %s, %s\n",
-                    s.getNo(),
-                    s.getName(), 
-                    s.getEmail(), 
-                    s.getPosition());
+        for (Manager m : list) {
+            out.printf("%d, %s, %s, %s\n",
+                    m.getNo(),
+                    m.getName(), 
+                    m.getEmail(), 
+                    m.getPosition());
         }
     }
     
