@@ -1,7 +1,6 @@
 package bitcamp.java110.cms;
 import java.util.Scanner;
-
-import bitcamp.java110.cms.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import bitcamp.java110.cms.context.RequestMappingHandlerMapping;
 import bitcamp.java110.cms.context.RequestMappingHandlerMapping.RequestMappingHandler;
 
@@ -11,19 +10,27 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         
-        ApplicationContext iocContainer = 
-                new ApplicationContext("bitcamp.java110.cms");
+        //Spring IoC 컨테이너 사용
+        ClassPathXmlApplicationContext iocContainer = 
+                new ClassPathXmlApplicationContext(
+                        "bitcamp/java110/cms/conf/application-context.xml");
+        
+        //Ioc 컨테이너 생성한 객체 조회하기
+        System.out.println("----------------------");
+        String[] names= iocContainer.getBeanDefinitionNames();
+        for(String name : names) {
+            System.out.println(name);
+        }
+        System.out.println("----------------------");
         
         RequestMappingHandlerMapping requestHandlerMap = 
                 new RequestMappingHandlerMapping();
         
         // => IoC 컨테이너에 보관된 객체의 이름 목록을 가져온다.
-        String[] names = iocContainer.getBeanDefinitionNames();
-        for (String name : names) {
-            // => 이름으로 객체를 꺼낸다.
+        String[] nameList = iocContainer.getBeanDefinitionNames();
+        for (String name : nameList) {
             Object obj = iocContainer.getBean(name);
-            
-            // => 객체에서 @RequestMapping이 붙은 메서드를 찾아 저장한다.
+           
             requestHandlerMap.addMapping(obj);
         }
         
@@ -49,6 +56,7 @@ public class App {
         }
         
         keyIn.close();
+        iocContainer.close();
     }
 
     private static String prompt() {
