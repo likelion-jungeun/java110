@@ -3,14 +3,13 @@ package bitcamp.java110.cms.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import bitcamp.java110.cms.dao.TeacherDao;
 import bitcamp.java110.cms.domain.Teacher;
 
-
 //@Component
-public class TeacherListDAO {
-
+public class TeacherListDao implements TeacherDao {
     private List<Teacher> list = new ArrayList<>();
-
+    
     public int insert(Teacher teacher) {
         for (Teacher item : list) {
             if (item.getEmail().equals(teacher.getEmail())) {
@@ -20,13 +19,11 @@ public class TeacherListDAO {
         list.add(teacher);
         return 1;
     }
-
+    
     public List<Teacher> findAll() {
-
         return list;
     }
-
-    // 이제 번호가 아닌, 이메일로 찾고 삭제할거임
+    
     public Teacher findByEmail(String email) {
         for (Teacher item : list) {
             if (item.getEmail().equals(email)) {
@@ -35,7 +32,7 @@ public class TeacherListDAO {
         }
         return null;
     }
-
+    
     public int delete(String email) {
         for (Teacher item : list) {
             if (item.getEmail().equals(email)) {
