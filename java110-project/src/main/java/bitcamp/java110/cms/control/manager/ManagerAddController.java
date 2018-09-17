@@ -15,6 +15,7 @@ import bitcamp.java110.cms.server.Response;
 public class ManagerAddController { 
 
     ManagerDao managerDao;
+    
 
     @Autowired
     public void setManagerDao(ManagerDao managerDao) {
