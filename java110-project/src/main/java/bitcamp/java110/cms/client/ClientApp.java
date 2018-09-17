@@ -14,7 +14,7 @@ public class ClientApp {
 
         try( 
                 // 서버에 연결하기 - 서버에 연결하면 리턴할거임!
-                Socket socket = new Socket("192.168.0.10",8888);
+                Socket socket = new Socket("localhost",8888);
 
                 // 서버에 데이터를 보내고 읽을 도구를 준비하기
                 PrintStream out = new PrintStream(
@@ -34,7 +34,7 @@ public class ClientApp {
           ){
             //서버에서 읽으면 다음라인으로 넘어감(즉,상대편이 읽어야 넘어감)
             //buffer가 찰때까지 출력이 안되기 때문에,flush를 사용해서 자동 출력해줘야해!!
-            out.println("HELLO"); out.flush();
+            out.println("안녕, 나는야 정은이라눙"); out.flush();
             System.out.println(in.readLine());//상대편이 보낸거 읽고 출력
             
             while (true) {

@@ -25,7 +25,7 @@ public class ManagerMysqlDao implements ManagerDao {
         this.dataSource = dataSource;
     }
 
-    public int insert(Manager manager) {
+    public int insert(Manager manager) throws DaoException{
         Statement stmt = null;
         Connection con = null;
 
@@ -63,7 +63,7 @@ public class ManagerMysqlDao implements ManagerDao {
         }
     }
 
-    public List<Manager> findAll() {
+    public List<Manager> findAll() throws DaoException{
 
         ArrayList<Manager> list = new ArrayList<>();
         Connection con = null;
@@ -80,7 +80,7 @@ public class ManagerMysqlDao implements ManagerDao {
                             " m.email," +
                             " mr.posi" +
                             " from p1_mgr mr" +
-                            " inner join p1_memb m on mr.mrno = m.mno");
+                    " inner join p1_memb m on mr.mrno = m.mno");
             while (rs.next()) {
 
                 Manager mgr = new Manager();
@@ -99,7 +99,7 @@ public class ManagerMysqlDao implements ManagerDao {
         return list;
     }
 
-    public Manager findByEmail(String email) {
+    public Manager findByEmail(String email) throws DaoException{
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -133,7 +133,7 @@ public class ManagerMysqlDao implements ManagerDao {
             try {stmt.close();} catch (Exception e) {}
         }
     }
-    public Manager findByNo(int no) {
+    public Manager findByNo(int no) throws DaoException{
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -169,7 +169,7 @@ public class ManagerMysqlDao implements ManagerDao {
         }
     }
 
-    public int delete(int no) {
+    public int delete(int no) throws DaoException{
         Connection con = null;
         Statement stmt = null;
         try {
@@ -180,7 +180,7 @@ public class ManagerMysqlDao implements ManagerDao {
             int count = stmt.executeUpdate(sql);
             if (count == 0)
                 return 0;
-            
+
             String sql2 = "delete from p1_memb where mno=" + no;
             stmt.executeUpdate(sql2);
             con.commit();
