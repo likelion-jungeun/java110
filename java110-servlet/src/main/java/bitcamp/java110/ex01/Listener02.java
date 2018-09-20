@@ -10,7 +10,8 @@ import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpServletRequest;
 
 // 클라이언트로부터 요청이 들어오면 실행되는 리스너
-@WebListener
+// 애노테이션을 지워버리면 동작을 하지 않음. 그냥 일반 클래스가 되버림
+//@WebListener
 public class Listener02 implements ServletRequestListener {
     
     public Listener02() {
