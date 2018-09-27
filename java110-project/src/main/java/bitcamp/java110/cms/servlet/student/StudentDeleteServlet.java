@@ -1,45 +1,36 @@
 package bitcamp.java110.cms.servlet.student;
 
+import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import bitcamp.java110.cms.dao.impl.StudentMysqlDao;
+import bitcamp.java110.cms.util.DataSource;
 
-import bitcamp.java110.cms.annotation.RequestMapping;
-import bitcamp.java110.cms.dao.StudentDao;
-import bitcamp.java110.cms.domain.Student;
+@WebServlet("/student/delete")
+public class StudentDeleteServlet extends HttpServlet{
 
-@Component
-public class StudentDeleteServlet {
+    private static final long serialVersionUID = 1L;
 
-    StudentDao studentDao;
+    StudentMysqlDao studentDao;
 
-    @Autowired
-    public void setStudentDao(StudentDao studentDao) {
-        this.studentDao = studentDao;
+    @Override
+    public void init() throws ServletException {
+        DataSource dataSource = new DataSource();
+        studentDao = new StudentMysqlDao();
+        studentDao.setDataSource(dataSource);
     }
 
-    @RequestMapping("student/add")
-    public void add(ServletRequest request, ServletResponse response) throws Exception {
-            Student s = new Student();
-            s.setName(request.getParameter("name"));
-            s.setEmail(request.getParameter("email"));
-            s.setPassword(request.getParameter("password"));
-            s.setSchool(request.getParameter("school"));
-            s.setWorking(Boolean.parseBoolean(request.getParameter("working")));
-            s.setTel(request.getParameter("tel"));
-
-            studentDao.insert(s);
-            PrintWriter out =response.getWriter();
-            out.println("등록하였습니다.");
-    }
     
-    @RequestMapping("student/delete")
-    public void delete(ServletRequest request, ServletResponse response) throws Exception {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/plain;charset=UTF-8");
         int no = Integer.parseInt(request.getParameter("no"));
        
         PrintWriter out = response.getWriter();
@@ -50,37 +41,4 @@ public class StudentDeleteServlet {
         }
     }
     
-    @RequestMapping("student/detail")
-    public void detail(ServletRequest request, ServletResponse response) throws Exception {
-        int no = Integer.parseInt(request.getParameter("no"));
-        Student s = studentDao.findByNo(no);
-        
-        PrintWriter out = response.getWriter();
-        if (s == null) {
-            out.println("해당 번호의 학생 정보가 없습니다!");
-            return;
-        }
-        
-        out.printf("이름: %s\n", s.getName());
-        out.printf("이메일: %s\n", s.getEmail());
-        out.printf("암호: %s\n", s.getPassword());
-        out.printf("최종학력: %s\n", s.getSchool());
-        out.printf("전화: %s\n", s.getTel());
-        out.printf("재직여부: %b\n", s.isWorking());
-    }
-    
-    @RequestMapping("student/list")
-    public void list(ServletRequest request, ServletResponse response) throws Exception {
-        PrintWriter out = response.getWriter();
-        List<Student> list = studentDao.findAll();
-        
-        for (Student s : list) {
-            out.printf("%d, %s, %s, %s, %b\n",
-                    s.getNo(),
-                    s.getName(), 
-                    s.getEmail(), 
-                    s.getSchool(),
-                    s.isWorking());
-        }
-    }
 }

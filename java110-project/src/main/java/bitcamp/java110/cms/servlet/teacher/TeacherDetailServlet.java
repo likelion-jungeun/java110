@@ -1,58 +1,38 @@
 package bitcamp.java110.cms.servlet.teacher;
 
+import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import bitcamp.java110.cms.annotation.RequestMapping;
-import bitcamp.java110.cms.dao.TeacherDao;
+import bitcamp.java110.cms.dao.impl.TeacherMysqlDao;
 import bitcamp.java110.cms.domain.Teacher;
+import bitcamp.java110.cms.util.DataSource;
 
-@Component
-public class TeacherDetailServlet {
+@WebServlet("/teacher/detail")
+public class TeacherDetailServlet extends HttpServlet {
 
-    TeacherDao teacherDao;
+    private static final long serialVersionUID = 1L;
 
-    @Autowired
-    public void setTeacherDao(TeacherDao teacherDao) {
-        this.teacherDao = teacherDao;
+    TeacherMysqlDao teacherDao;
+
+    @Override
+    public void init() throws ServletException {
+        DataSource dataSource = new DataSource();
+        teacherDao = new TeacherMysqlDao();
+        teacherDao.setDataSource(dataSource);
     }
 
-    @RequestMapping("teacher/add")
-    public void add(ServletRequest request, ServletResponse response) throws Exception{
-
-        Teacher t=new Teacher();
-        t.setName(request.getParameter("name"));
-        t.setEmail(request.getParameter("email"));
-        t.setPassword(request.getParameter("password"));
-        t.setTel(request.getParameter("tel"));
-        t.setPay(Integer.parseInt(request.getParameter("pay")));
-        t.setSubjects(request.getParameter("subject"));
-
-        teacherDao.insert(t);
-        PrintWriter out =response.getWriter();
-        out.println("등록하였습니다.");
-    }
-    
-    @RequestMapping("teacher/delete")
-    public void delete(ServletRequest request, ServletResponse response) throws Exception {
-        int no = Integer.parseInt(request.getParameter("no"));
-        
-        PrintWriter out = response.getWriter();
-        if (teacherDao.delete(no) > 0) {
-            out.println("삭제하였습니다.");
-        } else {
-            out.println("번호에 해당하는 강사가 없습니다.");
-        }
-    }
-    
-    @RequestMapping("teacher/detail")
-    public void detail(ServletRequest request, ServletResponse response) throws Exception {
+    @Override
+    protected void doGet(
+            HttpServletRequest request,
+            HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/plain;charset=UTF-8");
 
         int no = Integer.parseInt(request.getParameter("no"));
         Teacher t = teacherDao.findByNo(no);
@@ -71,19 +51,4 @@ public class TeacherDetailServlet {
         out.printf("강의과목: %s\n", t.getSubjects());
     }
     
-    @RequestMapping("teacher/list")
-    public void list(ServletRequest request, ServletResponse response) throws Exception {
-        PrintWriter out = response.getWriter();
-        
-        List<Teacher> list = teacherDao.findAll();
-        
-        for (Teacher t : list) {
-            out.printf("%d, %s, %s, %d, [%s]\n",
-                    t.getNo(),
-                    t.getName(), 
-                    t.getEmail(), 
-                    t.getPay(),
-                    t.getSubjects());
-        }
-    }
 }
