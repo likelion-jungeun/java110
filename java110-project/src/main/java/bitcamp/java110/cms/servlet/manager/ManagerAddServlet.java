@@ -2,27 +2,24 @@ package bitcamp.java110.cms.servlet.manager;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import bitcamp.java110.cms.dao.ManagerDao;
 import bitcamp.java110.cms.domain.Manager;
 
 @WebServlet("/manager/add")
 public class ManagerAddServlet extends HttpServlet {
-
     private static final long serialVersionUID = 1L;
 
-
     @Override
-    protected void doGet(
-            HttpServletRequest request, 
-            HttpServletResponse response)
-                    throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) // doget,dopost 둘다하고싶다면 service를하면됨
+            throws ServletException, IOException {
+
+        request.setCharacterEncoding("UTF-8");
+        
         Manager m = new Manager();
         m.setName(request.getParameter("name"));
         m.setEmail(request.getParameter("email"));
@@ -30,13 +27,30 @@ public class ManagerAddServlet extends HttpServlet {
         m.setTel(request.getParameter("tel"));
         m.setPosition(request.getParameter("position"));
 
-        response.setContentType("text/plain;charset=UTF-8");
-        ManagerDao managerDao = (ManagerDao)this.getServletContext()
-                .getAttribute("managerDao");
-        managerDao.insert(m);
+        response.setContentType("text/html;charset=UTF-8");
+
         PrintWriter out = response.getWriter();
-        out.println("등록하였습니다.");
 
+        ManagerDao managerDao = (ManagerDao) 
+                this.getServletContext().getAttribute("managerDao");
+
+        out.println("<!DOCThtml>");
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<meta charset='UTF-8'>");
+        out.println("<title>매니저 관리</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<h1>매니저 등록 결과</h1>");
+
+        try {
+            managerDao.insert(m);
+            out.println("<p>저장하였습니다.</p>");
+        } catch (Exception e) {
+            e.printStackTrace();
+            out.println("<p>등록 중 오류 발생!</p>");
+        }
+        out.println("</body>");
+        out.println("</html>");
     }
-
 }
