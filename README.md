@@ -1,6 +1,13 @@
 # java110
 비트캠프 **자바 110기** 실습 프로젝트
 
+## v4.2 - 180928
+
+- 리스너를 이용하여 공용 자원을 준비하기
+- 작업
+  -> ContextLoaderListener 클래스 생성
+  -> 이 리스러에서 DAO 준비
+
 ## v4.1 - 180927
 
 - 서블릿의 loadOnStartup 배치 속성을 이용하여 공용 자원을 준비하기
@@ -8,7 +15,7 @@
 - 작업
   -> InitServlet 클래스 생성
   -> InitServlet에서 DAO와 DataSource 준비하기
-  -> ~
+  -> ServletContext에 DAO 보관하기
 
 ## v4.0 - 180927 (과거기술로 되돌아감 v3.1까지가 최신기술(스프링))
 
