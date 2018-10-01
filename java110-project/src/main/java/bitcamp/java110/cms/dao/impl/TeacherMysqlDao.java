@@ -82,20 +82,22 @@ public class TeacherMysqlDao implements TeacherDao {
                             " m.mno," +
                             " m.name," + 
                             " m.email," + 
+                            " m.tel," +
                             " t.hrpay," +
                             " t.subj" +
                             " from p1_tchr t" + 
                     " inner join p1_memb m on t.tno = m.mno");
 
             while (rs.next()) {
-                Teacher s = new Teacher();
-                s.setNo(rs.getInt("mno"));
-                s.setEmail(rs.getString("email"));
-                s.setName(rs.getString("name"));
-                s.setPay(rs.getInt("hrpay"));
-                s.setSubjects(rs.getString("subj"));
+                Teacher t = new Teacher();
+                t.setNo(rs.getInt("mno"));
+                t.setEmail(rs.getString("email"));
+                t.setName(rs.getString("name"));
+                t.setTel(rs.getString("tel"));
+                t.setPay(rs.getInt("hrpay"));
+                t.setSubjects(rs.getString("subj"));
 
-                list.add(s);
+                list.add(t);
             }
         } catch (Exception e) {
             //select는 rollback 할 필요 없음. 단순히 검색하는건데 실패한다한들 취소할 이유 없기때문.
@@ -121,6 +123,7 @@ public class TeacherMysqlDao implements TeacherDao {
                             " m.mno," +
                             " m.name," + 
                             " m.email," + 
+                            " m.tel," +
                             " t.hrpay," +
                             " t.subj" +
                             " from p1_tchr t" + 
@@ -224,4 +227,46 @@ public class TeacherMysqlDao implements TeacherDao {
             try {stmt.close();} catch (Exception e) {}
         }
     }
+    
+    @Override
+    public Teacher findByEmailPassword(String email, String password) throws DaoException{
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            con = dataSource.getConnection();
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(
+                    "select" +
+                            " m.mno," +
+                            " m.name," +
+                            " m.email," +
+                            " m.tel," +
+                            " t.hrpay," +
+                            " t.subj" +
+                            " from p1_tchr t" + 
+                            " inner join p1_memb m on t.tno = m.mno" +
+                            " where m.email='" + email +
+                            "' and  m.pwd= password('" + password +
+                    "')");
+            
+            if (rs.next()) {
+                Teacher t = new Teacher();
+                t.setNo(rs.getInt("mno"));
+                t.setEmail(rs.getString("email"));
+                t.setName(rs.getString("name"));
+                t.setTel(rs.getString("tel"));
+                t.setPay(rs.getInt("hrpay"));
+                t.setSubjects(rs.getString("subj"));
+                return t;
+            }
+            return null;
+        } catch (Exception e) {
+            throw new DaoException(e);
+        } finally {
+            try {rs.close();} catch (Exception e) {}
+            try {stmt.close();} catch (Exception e) {}
+        }
+    }
+    
 }

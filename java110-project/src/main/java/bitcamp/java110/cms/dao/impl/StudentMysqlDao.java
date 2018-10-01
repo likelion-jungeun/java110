@@ -83,6 +83,7 @@ public class StudentMysqlDao implements StudentDao {
                             " m.mno," +
                             " m.name," + 
                             " m.email," + 
+                            " m.tel," +
                             " s.schl," +
                             " s.work" +
                             " from p1_stud s" + 
@@ -93,6 +94,7 @@ public class StudentMysqlDao implements StudentDao {
                 s.setNo(rs.getInt("mno"));
                 s.setEmail(rs.getString("email"));
                 s.setName(rs.getString("name"));
+                s.setTel(rs.getString("tel"));
                 s.setSchool(rs.getString("schl"));
                 s.setWorking(rs.getString("work").equals("Y") ? true : false);
 
@@ -123,6 +125,7 @@ public class StudentMysqlDao implements StudentDao {
                             " m.mno," +
                             " m.name," + 
                             " m.email," + 
+                            " m.tel," + 
                             " s.schl," +
                             " s.work" + 
                             " from p1_stud s" + 
@@ -224,4 +227,47 @@ public class StudentMysqlDao implements StudentDao {
             try {stmt.close();} catch (Exception e) {}
         }
     }
+    
+    @Override
+    public Student findByEmailPassword(String email, String password) throws DaoException{
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            con = dataSource.getConnection();
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(
+                    "select" +
+                            " m.mno," +
+                            " m.name," +
+                            " m.email," +
+                            " m.tel," +
+                            " s.schl," +
+                            " s.work" + 
+                            " from p1_stud s" + 
+                            " inner join p1_memb m on s.sno = m.mno" +
+                            " where m.email='" + email +
+                            "' and  m.pwd= password('" + password +
+                    "')");
+            if (rs.next()) {
+                Student s = new Student();
+                s.setNo(rs.getInt("mno"));
+                s.setEmail(rs.getString("email"));
+                s.setName(rs.getString("name"));
+                s.setTel(rs.getString("tel"));
+                s.setSchool(rs.getString("schl"));
+                s.setWorking(rs.getString("work").equals("Y") ? true : false);
+
+                return s;
+            }
+            return null;
+        } catch (Exception e) {
+            throw new DaoException(e);
+        } finally {
+            try {rs.close();} catch (Exception e) {}
+            try {stmt.close();} catch (Exception e) {}
+        }
+    }
+    
+    
 }
