@@ -13,38 +13,50 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/ex11/servlet12")
 public class Servlet12 extends HttpServlet {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
+
     @Override
     protected void doPost(
-            HttpServletRequest request,
+            HttpServletRequest request, 
             HttpServletResponse response) 
                     throws ServletException, IOException {
         
         request.setCharacterEncoding("UTF-8");
-        String name= request.getParameter("name");
+        String name = request.getParameter("name");
         
         // 클라이언트가 보낸 데이터를 세션에 보관한다.
-        HttpSession session= request.getSession();
+        HttpSession session = request.getSession();
         session.setAttribute("name", name);
         
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-       
+        
         out.println("<!DOCTYPE html>");
         out.println("<html>");
-        out.println(" <head>");
-        out.println(" <meta charset='UTF-8'>");
-        out.println(" <title>session</title>");
-        out.println(" </head>");
-        out.println(" <body>");
-        out.println(" <h1>2페이지</h1>");
-        out.println(" <form action='servlet13' method='post'>");
-        out.println("  나이 : <input type='number' name='age'><br>");
-        out.println(" <button>다음</button>");
-        out.println("  </form>");
-        out.println(" </body>");
-        out.println(" </html>");
-      
+        out.println("<head>");
+        out.println("<meta charset='UTF-8'>");
+        out.println("<title>session</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<h1>2페이지</h1>");
+        out.println("<form action='servlet13' method='post'>");
+        out.println("나이: <input type='number' name='age'><br>");
+        out.println("<button>다음</button>");
+        out.println("</form>");
+        out.println("</body>");
+        out.println("</html>");
     }
-    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
