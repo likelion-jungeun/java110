@@ -1,9 +1,14 @@
-/* 쿠키(cookie) - 사용 범위 지정하기
- * => 쿠키의 사용 범위를 지정하면 해당 범위에 있는 URL을 요청할 때는 
- *    웹 브라우저가 쿠키를 보낸다.
+/* 쿠키(cookie) - 사용 기간 지정하기
+ * => 쿠키의 사용 기간을 지정하지 않으면,
+ *    웹 브라우저는 메모리에 임시보관한다.
+ *    그래서 웹 브라우저를 닫으면 해당 쿠키는 버려진다.
+ * => 쿠키의 사용 기간을 지정하면,
+ *    웹 브라우저는 별도의 파일에 보관한다.
+ *    그래서 웹 브라우저는 쿠키의 유효기간 동안에는 서버에 쿠키를 제시한다.
+ *    유효기간이 지나면 로컬에 저장된 쿠키를 삭제한다. 
  */
 
-package ex10;
+package bitcamp.java110.ex10;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,8 +20,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/ex10/servlet01_2")
-public class Servlet01_2 extends HttpServlet {
+@WebServlet("/ex10/servlet01_3")
+public class Servlet01_3 extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -25,22 +30,19 @@ public class Servlet01_2 extends HttpServlet {
             HttpServletResponse res) 
                     throws ServletException, IOException {
 
-        // => 현재 경로에 한정
-        //    "이 쿠키는 같은 경로 (/ex10/**)의 서블릿을 요청할 때 보내달라"
-        //    라고 웹 브라우저에게 지시하는 것이다.
+        // => 유효기간 : 웹 브라우저를 실행하는 동안만 유효
         Cookie c1 = new Cookie("name","hongkildong");
+        c1.setPath("/");
         
-        // => 웹 애플리케이션 전체 범위로 확장
-        //    "이 쿠키는 전체 서블릿(/**)에 대해 무조건 보내달라"
-        //    라고 웹 브라우저에게 지시하는 것이다.
+        // => 유효기간 : 쿠키를 받은 시점에서60초 동안만 유효
         Cookie c2 = new Cookie("age","12");
-        c2.setPath("/");
+        c1.setPath("/");
+        c2.setMaxAge(60);
         
-        // => 현재 경로보다 더 좁히기
-        //    "이 쿠키는 /ex10/a/b/** 경로에 서블릿을 요청할 때만 보내달라"
-        //    라고 웹 브라우저에게 지시하는 것이다.
+        // => 유효기간 : 쿠키를 받은 시점에서 1일 동안만 유효
         Cookie c3 = new Cookie("working", "true");
-        c3.setPath("/ex10/a/b");
+        c1.setPath("/");
+        c3.setMaxAge(60 * 60 * 24);
         
         // 2) 응답 헤더에 쿠키를 포함하기
         res.addCookie(c1);
@@ -49,9 +51,10 @@ public class Servlet01_2 extends HttpServlet {
         
         /* HTTP 응답 프로토콜 예)
          * HTTP/1.1 200
-        Set-Cookie: name=hongkildong
-        Set-Cookie: age=12; Path=/ <== 경로 정보가 추가된다.
-        Set-Cookie: working=true; Path=/ex10/a/b <== 경로 정보가 추가된다.
+        Set-Cookie: name=hongkildong; Path=/
+        Set-Cookie: age=12; Max-Age=60; Expires=Mon, 01-Oct-2018 03:34:49 GMT <== 종료날짜 지정됨
+        Set-Cookie: working=true; Max-Age=86400; Expires=Tue, 02-Oct-2018 03:33:49 GMT
+
         Content-Type: text/html;charset=UTF-8
         Content-Length: 140
         Date: Mon, 01 Oct 2018 02:49:36 GMT

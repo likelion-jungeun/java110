@@ -1,7 +1,7 @@
 /* 쿠키(cookie) - 같은 경로의 서블릿이 쿠키를 받는 예
  */
 
-package ex10;
+package bitcamp.java110.ex10;
 
 import java.io.IOException;
 import java.io.PrintWriter;

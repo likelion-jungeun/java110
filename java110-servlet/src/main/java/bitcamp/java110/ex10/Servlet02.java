@@ -6,7 +6,7 @@
  *    다음에 서버에 요청할 때 그 쿠키를 다시 서버에 제시해야 한다.
  */
 
-package ex10;
+package bitcamp.java110.ex10;
 
 import java.io.IOException;
 import java.io.PrintWriter;

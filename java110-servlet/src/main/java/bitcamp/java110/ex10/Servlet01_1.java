@@ -10,7 +10,7 @@
  *       다음에 /a/** 경로로 시작하는 요청에 대해서는 /a/s1에서 받은 쿠키를 서버에 제시해야 한다.
  */
 
-package ex10;
+package bitcamp.java110.ex10;
 
 import java.io.IOException;
 import java.io.PrintWriter;

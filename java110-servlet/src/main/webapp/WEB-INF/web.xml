@@ -15,15 +15,15 @@
 		<param-name>aaa</param-name>
 		<param-value>okok</param-value>
 	</context-param>
-	
-	<!--  리스터 클래스에 대한 정보 설정 -->
+
+	<!-- 리스터 클래스에 대한 정보 설정 -->
 	<listener>
-	   <listener-class>bitcamp.java110.ex07.Listener01</listener-class>
+		<listener-class>bitcamp.java110.ex07.Listener01</listener-class>
 	</listener>
 
 	<!-- <request-character-encoding>UTF-8</request-character-encoding> -->
 	<!-- Define example filters -->
-	
+
 	<!-- 서블릿 클래스에 대한 정보 설정 -->
 	<servlet>
 		<servlet-name>Servlet03</servlet-name>
@@ -87,4 +87,9 @@
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+
+    <!-- 세션의 타임아웃 설정(단위 : 분) -->
+	<session-config>
+		<session-timeout>10</session-timeout>
+	</session-config>
 </web-app>
