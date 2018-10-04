@@ -1,13 +1,25 @@
 # java110
 비트캠프 **자바 110기** 실습 프로젝트
 
+## v4.9 - 181004
+
+- JSP를 활용한 MVC 모델 I타입 적용
+- Servlet + JSP를 활용한 MVC 모델 II타입 적용
+- MVC type I 작업
+  -> /webapp/mvc1/manager/list.jsp 생성
+  -> /webapp/mvc1/header.jsp 생성
+  -> /webapp/mvc1/footer.jsp 생성
+- MVC type II 작업
+  -> /webapp/manager/list.jsp 생성
+  -> ManagerListServlet 변경
+  -> 
+
 ## v4.8 - 181002
 
 - 필터를 이용하여 사용 권한 제어하기
 - 작업
   -> AuthFilter 클래스를 생성하여 등록한다.
   -> 로그인 사용자만 add와 delete을 할 수 있도록 제어한다.
-
 
 ## v4.7 - 181002
 
@@ -18,7 +30,6 @@
      -> 로그아웃 링크도 출력한다.
   -> 만약, 로그인 되어 있지 않을 경우 로그인 링크를 출력한다.
   -> 로그아웃 기능을 추가한다.
-
 
 ## v4.6 - 181001
 

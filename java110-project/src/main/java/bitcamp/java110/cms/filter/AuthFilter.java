@@ -21,7 +21,6 @@ public class AuthFilter implements Filter {
             ServletRequest request, 
             ServletResponse response, 
             FilterChain chain)
-    
             throws IOException, ServletException {
         
         HttpServletRequest httpRequest = (HttpServletRequest)request;
