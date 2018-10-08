@@ -18,6 +18,8 @@ th {
 
 <jsp:include page="../header.jsp"></jsp:include>
 
+
+
 <h1>매니저 등록(MVC)</h1>
 
 <form action='add' method='post'>
