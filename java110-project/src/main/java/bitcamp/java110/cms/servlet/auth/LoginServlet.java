@@ -26,7 +26,6 @@ public class LoginServlet extends HttpServlet {
             HttpServletResponse response) 
                     throws ServletException, IOException {
         
-      
         response.setContentType("text/html;charset=UTF-8");
         
         // form.jsp 인클루딩

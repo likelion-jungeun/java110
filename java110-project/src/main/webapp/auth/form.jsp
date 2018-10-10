@@ -20,13 +20,6 @@ th {
 
 <h1>로그인</h1>
 
-<jsp:useBean
-    scope="request"
-    id="email"
-    class="java.lang.String"
-    
- />
-
 <form action='login' method='post'>
 <table>
 <tr>
