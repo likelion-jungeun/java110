@@ -53,8 +53,8 @@ public class LoginServlet extends HttpServlet {
             cookie.setMaxAge(0);
             response.addCookie(cookie);
         }
-
-        AuthService authService =
+        
+        AuthService authService = 
                 (AuthService)this.getServletContext()
                                  .getAttribute("authService");
         

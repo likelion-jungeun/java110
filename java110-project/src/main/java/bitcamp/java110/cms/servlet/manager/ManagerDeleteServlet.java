@@ -23,8 +23,9 @@ public class ManagerDeleteServlet extends HttpServlet {
         int no = Integer.parseInt(request.getParameter("no"));
         
         
-        ManagerService managerService = (ManagerService)this.getServletContext()
-                .getAttribute("managerService");
+        ManagerService managerService = 
+                (ManagerService)this.getServletContext()
+                                    .getAttribute("managerService");
         
         try {
             managerService.delete(no);
@@ -41,4 +42,25 @@ public class ManagerDeleteServlet extends HttpServlet {
     }
     
 }
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    
+    
+    
+    
     

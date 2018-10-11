@@ -32,15 +32,14 @@ public class StudentMysqlDao implements StudentDao {
                     + ",'" + student.getSchool()
                     + "','" + (student.isWorking()?'Y':'N')
                     + "')";
-            
             return stmt.executeUpdate(sql);
-          
             
         } catch (Exception e) {
             throw new DaoException(e);
             
         } finally {
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -82,6 +81,7 @@ public class StudentMysqlDao implements StudentDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
         return list;
     }
@@ -128,6 +128,7 @@ public class StudentMysqlDao implements StudentDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -174,6 +175,7 @@ public class StudentMysqlDao implements StudentDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -187,12 +189,13 @@ public class StudentMysqlDao implements StudentDao {
             
             String sql = "delete from p1_stud where sno=" + no ;
             return stmt.executeUpdate(sql);
-          
+            
         } catch (Exception e) {
             throw new DaoException(e);
             
         } finally {
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -240,6 +243,7 @@ public class StudentMysqlDao implements StudentDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
 }

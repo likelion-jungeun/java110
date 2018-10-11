@@ -20,25 +20,25 @@ public class ManagerMysqlDao implements ManagerDao {
     }
 
     public int insert(Manager manager) throws DaoException {
-
-        Connection con = null;
         Statement stmt = null;
+        
+        Connection con = null;
         
         try {
             con = dataSource.getConnection();
             stmt = con.createStatement();
-            
             String sql = "insert into p1_mgr(mrno,posi)"
                     + " values(" + manager.getNo()
                     + ",'" + manager.getPosition()
                     + "')";
             return stmt.executeUpdate(sql);
-          
+            
         } catch (Exception e) {
             throw new DaoException(e);
             
         } finally {
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -52,7 +52,7 @@ public class ManagerMysqlDao implements ManagerDao {
         
         try {
             con = dataSource.getConnection();
-            
+
             stmt = con.createStatement();
             
             rs = stmt.executeQuery(
@@ -79,6 +79,7 @@ public class ManagerMysqlDao implements ManagerDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
         return list;
     }
@@ -124,6 +125,7 @@ public class ManagerMysqlDao implements ManagerDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -168,6 +170,7 @@ public class ManagerMysqlDao implements ManagerDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -186,6 +189,7 @@ public class ManagerMysqlDao implements ManagerDao {
             
         } finally {
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -230,6 +234,7 @@ public class ManagerMysqlDao implements ManagerDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     

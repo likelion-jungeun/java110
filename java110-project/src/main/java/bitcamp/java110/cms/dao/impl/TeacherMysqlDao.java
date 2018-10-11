@@ -26,21 +26,20 @@ public class TeacherMysqlDao implements TeacherDao {
         try {
             con = dataSource.getConnection();
             stmt = con.createStatement();
-    
+            
             String sql = "insert into p1_tchr(tno,hrpay,subj)"
                     + " values(" + teacher.getNo()
                     + "," + teacher.getPay()
                     + ",'" + teacher.getSubjects()
                     + "')";
-            
             return stmt.executeUpdate(sql);
-            
             
         } catch (Exception e) {
             throw new DaoException(e);
             
         } finally {
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -82,6 +81,7 @@ public class TeacherMysqlDao implements TeacherDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
         return list;
     }
@@ -127,6 +127,7 @@ public class TeacherMysqlDao implements TeacherDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -173,6 +174,7 @@ public class TeacherMysqlDao implements TeacherDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -185,13 +187,14 @@ public class TeacherMysqlDao implements TeacherDao {
             stmt = con.createStatement();
             
             String sql = "delete from p1_tchr where tno=" + no ;
-           return stmt.executeUpdate(sql);
-           
+            return stmt.executeUpdate(sql);
+            
         } catch (Exception e) {
             throw new DaoException(e);
             
         } finally {
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
     
@@ -238,8 +241,16 @@ public class TeacherMysqlDao implements TeacherDao {
         } finally {
             try {rs.close();} catch (Exception e) {}
             try {stmt.close();} catch (Exception e) {}
+            dataSource.returnConnection(con);
         }
     }
 }
+
+
+
+
+
+
+
 
 
