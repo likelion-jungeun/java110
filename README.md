@@ -1,6 +1,16 @@
 # java110
 비트캠프 **자바 110기** 실습 프로젝트
 
+## v5.7 - 181016
+
+- Mybatis persistence framework 적용하기
+- 작업
+  -> build.gradle에 mybatis 라이브러리 등록
+  -> 'gradle eclipse' 실행
+  -> 이클립스 프로젝트 리프래시
+  -> DAO, Servicem Servlet 변경
+  -> ContextLoaderListener 변경
+
 ## v5.6 - 181012
 
 - Statement를 PreparedStatement로 변경하기
