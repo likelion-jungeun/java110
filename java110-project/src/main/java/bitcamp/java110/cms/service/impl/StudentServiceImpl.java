@@ -11,7 +11,7 @@ import bitcamp.java110.cms.dao.PhotoDao;
 import bitcamp.java110.cms.dao.StudentDao;
 import bitcamp.java110.cms.domain.Student;
 import bitcamp.java110.cms.service.StudentService;
-
+ 
 public class StudentServiceImpl implements StudentService {
 
     SqlSessionFactory sqlSessionFactory;

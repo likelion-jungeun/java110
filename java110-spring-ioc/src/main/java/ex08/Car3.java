@@ -5,8 +5,7 @@ import java.sql.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-
-// @Qualifiler 사용
+// @Qualifier 사용
 public class Car3 {
     private int no;
     private String model;

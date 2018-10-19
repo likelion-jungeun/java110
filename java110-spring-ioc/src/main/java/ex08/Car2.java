@@ -4,12 +4,11 @@ import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 // @Autowired 사용법
 // 1) setter에 붙이기
 // 2) field에 붙이기
 //    - setter가 없어도 된다.
-// 
+//
 public class Car2 {
     private int no;
     private String model;
