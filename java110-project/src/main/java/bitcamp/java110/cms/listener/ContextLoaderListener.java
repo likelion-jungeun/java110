@@ -49,6 +49,21 @@ public class ContextLoaderListener implements ServletContextListener {
             sc.setAttribute("teacherService", teacherService);
             sc.setAttribute("authService", authService);
             
+//            System.out.println("------------------------------");
+//            
+//            // 컨테이너에 들어 있는 객체의 개수와 이름 알아내기
+//            int count = context.getBeanDefinitionCount();
+//            System.out.printf("bean 개수 = %d\n", count);
+//            
+//            String[] names = context.getBeanDefinitionNames();
+//            for (String name : names) {
+//                System.out.printf("=> %s : %s\n", 
+//                        name, 
+//                        context.getType(name).getName());
+//            }
+//            
+//            System.out.println("------------------------------");
+//            
         } catch (Exception e) {
             e.printStackTrace();
         }
