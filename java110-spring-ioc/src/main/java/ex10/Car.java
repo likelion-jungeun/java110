@@ -83,14 +83,11 @@ public class Car {
         return engine;
     }
 
+
     @Override
     public String toString() {
         return "Car [no=" + no + ", model=" + model + ", maker=" + maker + ", cc=" + cc + ", createdDate=" + createdDate
                 + ", engine=" + engine + "]";
     }
 
-    
-    
-    
-    
 }

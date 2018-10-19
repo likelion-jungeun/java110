@@ -3,15 +3,19 @@ package ex08;
 import java.sql.Date;
 
 import javax.annotation.Resource;
-// @Resource = @Autowired + @Qualifiler
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+
+// @Resource = @Autowired + @Qualifier
 public class Car4 {
     private int no;
     private String model;
     private String maker;
     private int cc;
     private Date createdDate;
-   
-    @Resource(name="e2")
+    
+    @Resource(name="e2") // => @Autowired @Qualifier("e2")
     private Engine engine;
     
     public Car4() {
@@ -87,4 +91,8 @@ public class Car4 {
                 + ", engine=" + engine + "]";
     }
 
+    
+    
+    
+    
 }
