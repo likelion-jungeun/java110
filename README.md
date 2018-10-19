@@ -1,8 +1,6 @@
 # java110
 비트캠프 **자바 110기** 실습 프로젝트
 
-<<<<<<< HEAD
-=======
 ## v6.0 - 181019
 
 - Mybatis와 Spring IoC 컨테이너 연동
@@ -25,7 +23,6 @@
         -> mybatis-spring 라이브러리에서 제공하는 SqlSessionFactoryBean 을 사용한다.
         -> 의존 라이브러리 spring-jdbc를 추가해야 한다.
 
->>>>>>> b1
 
 ## v5.9 - 181019
 - Spring IoC 컨테이너 적용
