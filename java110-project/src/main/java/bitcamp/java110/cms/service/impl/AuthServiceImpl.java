@@ -10,7 +10,7 @@ import bitcamp.java110.cms.dao.StudentDao;
 import bitcamp.java110.cms.dao.TeacherDao;
 import bitcamp.java110.cms.domain.Member;
 import bitcamp.java110.cms.service.AuthService;
-
+ 
 public class AuthServiceImpl implements AuthService {
 
     SqlSessionFactory sqlSessionFactory;

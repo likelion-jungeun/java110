@@ -15,7 +15,7 @@ import bitcamp.java110.cms.service.TeacherService;
 public class TeacherServiceImpl implements TeacherService {
 
     SqlSessionFactory sqlSessionFactory;
-
+ 
     public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
         this.sqlSessionFactory = sqlSessionFactory;
     }

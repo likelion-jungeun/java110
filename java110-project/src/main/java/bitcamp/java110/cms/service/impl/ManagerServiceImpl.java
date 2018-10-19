@@ -11,7 +11,7 @@ import bitcamp.java110.cms.dao.MemberDao;
 import bitcamp.java110.cms.dao.PhotoDao;
 import bitcamp.java110.cms.domain.Manager;
 import bitcamp.java110.cms.service.ManagerService;
-
+ 
 public class ManagerServiceImpl implements ManagerService {
 
     SqlSessionFactory sqlSessionFactory;

@@ -1,6 +1,15 @@
 # java110
 비트캠프 **자바 110기** 실습 프로젝트
 
+
+## v5.9 - 181019
+- Spring IoC 컨테이너 적용
+- 작업
+  -> Spring IoC 라이브러리 추가
+  -> ContextLoaderListener 변경
+  -> Service와 DAO를 Spring IoC 컨테이너에서 관리하도록 변경
+
+
 ## v5.8 - 181016
 
 - Mybatis에서 자동으로 생성해주는 Mapper(DAO) 객체 사용하기
@@ -10,6 +19,7 @@
   -> Service 객체에 SqlSessionPactory를 주입한다.
   -> Service 객체는 SqlSessionFactory를 통해 DAO를 만들어 얻어쓴다.
   -> insert, delete 메서드에 트랜잭션을 적용한다.
+
   -> ContextLoaderListener 변경
 
 ## v5.7 - 181016
