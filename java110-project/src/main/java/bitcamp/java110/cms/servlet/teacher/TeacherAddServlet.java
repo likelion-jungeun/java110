@@ -53,7 +53,7 @@ public class TeacherAddServlet extends HttpServlet {
                 iocContainer.getBean(TeacherService.class);
         
         try {
-            // ÏÇ¨ÏßÑ Îç∞Ïù¥ÌÑ∞ Ï≤òÎ¶¨
+            // ?Ç¨Ïß? ?ç∞?ù¥?Ñ∞ Ï≤òÎ¶¨
             Part part = request.getPart("file1");
             if (part.getSize() > 0) {
                 String filename = UUID.randomUUID().toString();
@@ -67,7 +67,7 @@ public class TeacherAddServlet extends HttpServlet {
             
         } catch(Exception e) {
             request.setAttribute("error", e);
-            request.setAttribute("message", "Í∞ïÏÇ¨ Îì±Î°ù Ïò§Î•ò!");
+            request.setAttribute("message", "Í∞ïÏÇ¨ ?ì±Î°? ?ò§Î•?!");
             request.setAttribute("refresh", "3;url=list");
           
 

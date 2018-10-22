@@ -36,9 +36,9 @@ public class ManagerAddServlet extends HttpServlet {
             HttpServletResponse response) 
             throws ServletException, IOException {
         
-        // POST ë°©ì‹ìœ¼ë¡œ ë“¤ì–´ì˜¨ í•œê¸€ ë°ì´í„°ëŠ” 
-        // ë‹¤ìŒ ë©”ì„œë“œë¥¼ í˜¸ì¶œí•˜ì—¬ ì–´ë–¤ ì¸ì½”ë”©ì¸ì§€ ì•Œë ¤ì¤˜ì•¼ 
-        // getParameter() í˜¸ì¶œí•  ë•Œ ì •ìƒì ìœ¼ë¡œ ë””ì½”ë”© í•  ê²ƒì´ë‹¤.
+        // POST ë°©ì‹?œ¼ë¡? ?“¤?–´?˜¨ ?•œê¸? ?°?´?„°?Š” 
+        // ?‹¤?Œ ë©”ì„œ?“œë¥? ?˜¸ì¶œí•˜?—¬ ?–´?–¤ ?¸ì½”ë”©?¸ì§? ?•Œ? ¤ì¤˜ì•¼ 
+        // getParameter() ?˜¸ì¶œí•  ?•Œ ? •?ƒ? ?œ¼ë¡? ?””ì½”ë”© ?•  ê²ƒì´?‹¤.
         request.setCharacterEncoding("UTF-8");
         
         Manager m = new Manager();
@@ -55,7 +55,7 @@ public class ManagerAddServlet extends HttpServlet {
                 iocContainer.getBean(ManagerService.class);
         
         try {
-            // ì‚¬ì§„ ë°ì´í„° ì²˜ë¦¬
+            // ?‚¬ì§? ?°?´?„° ì²˜ë¦¬
             Part part = request.getPart("file1");
             if (part.getSize() > 0) {
                 String filename = UUID.randomUUID().toString();
@@ -66,16 +66,16 @@ public class ManagerAddServlet extends HttpServlet {
             
             managerService.add(m);
             
-            // ì˜¤ë¥˜ ì—†ì´ ë“±ë¡ì— ì„±ê³µí–ˆìœ¼ë©´, 
-            // ëª©ë¡ í˜ì´ì§€ë¥¼ ë‹¤ì‹œ ìš”ì²­í•˜ë¼ê³  redirect ëª…ë ¹ì„ ë³´ë‚¸ë‹¤.
+            // ?˜¤ë¥? ?—†?´ ?“±ë¡ì— ?„±ê³µí–ˆ?œ¼ë©?, 
+            // ëª©ë¡ ?˜?´ì§?ë¥? ?‹¤?‹œ ?š”ì²??•˜?¼ê³? redirect ëª…ë ¹?„ ë³´ë‚¸?‹¤.
             request.setAttribute("viewUrl", "redirect:list");
             
         } catch(Exception e) {
             
-            // ìœ„ì„í•˜ê¸° ì „ì— ì‘ì—…ì„ ìˆ˜í–‰í•˜ëŠ”ë° í•„ìš”í•œ ì •ë³´ë¥¼ 
-            // ServletRequest ë³´ê´€ì†Œì— ë‹´ì•„ ì „ë‹¬í•œë‹¤.
+            // ?œ„?„?•˜ê¸? ? „?— ?‘?—…?„ ?ˆ˜?–‰?•˜?Š”?° ?•„?š”?•œ ? •ë³´ë?? 
+            // ServletRequest ë³´ê??†Œ?— ?‹´?•„ ? „?‹¬?•œ?‹¤.
             request.setAttribute("error", e);
-            request.setAttribute("message", "ë§¤ë‹ˆì € ë“±ë¡ ì˜¤ë¥˜!");
+            request.setAttribute("message", "ë§¤ë‹ˆ?? ?“±ë¡? ?˜¤ë¥?!");
             request.setAttribute("refresh", "3;url=list");
             
             request.setAttribute("viewUrl", "/error.jsp");

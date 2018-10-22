@@ -43,12 +43,12 @@ public class LoginServlet extends HttpServlet {
         
         ArrayList<Cookie> cookies = new ArrayList<>();
         
-        if (save != null) {// ì´ë©”ì¼ ì €ì¥í•˜ê¸°ë¥¼ ì²´í¬í–ˆë‹¤ë©´,
+        if (save != null) {// ?´ë©”ì¼ ???¥?•˜ê¸°ë?? ì²´í¬?–ˆ?‹¤ë©?,
             Cookie cookie = new Cookie("email", email);
             cookie.setMaxAge(60 * 60 * 24 * 15);
             cookies.add(cookie);
             
-        } else {// ì´ë©”ì¼ì„ ì €ì¥í•˜ê³  ì‹¶ì§€ ì•Šë‹¤ë©´,
+        } else {// ?´ë©”ì¼?„ ???¥?•˜ê³? ?‹¶ì§? ?•Š?‹¤ë©?,
             Cookie cookie = new Cookie("email", "");
             cookie.setMaxAge(0);
             cookies.add(cookie);
@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
         
         HttpSession session = request.getSession();
         if (loginUser != null) {
-            // íšŒì› ì •ë³´ë¥¼ ì„¸ì…˜ì— ë³´ê´€í•œë‹¤.
+            // ?šŒ?› ? •ë³´ë?? ?„¸?…˜?— ë³´ê??•œ?‹¤.
             session.setAttribute("loginUser", loginUser);
             String redirectUrl = null;
             
@@ -81,8 +81,8 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("viewUrl", "redirect:"+redirectUrl);
             
         } else {
-            // ë¡œê·¸ì¸ ëœ ìƒíƒœì—ì„œ ë‹¤ë¥¸ ì‚¬ìš©ìë¡œ ë¡œê·¸ì¸ì„ ì‹œë„í•˜ë‹¤ê°€ 
-            // ì‹¤íŒ¨í•œë‹¤ë©´ ë¬´ì¡°ê±´ ì„¸ì…˜ì„ ë¬´íš¨í™”ì‹œí‚¨ë‹¤.
+            // ë¡œê·¸?¸ ?œ ?ƒ?ƒœ?—?„œ ?‹¤ë¥? ?‚¬?š©?ë¡? ë¡œê·¸?¸?„ ?‹œ?„?•˜?‹¤ê°? 
+            // ?‹¤?Œ¨?•œ?‹¤ë©? ë¬´ì¡°ê±? ?„¸?…˜?„ ë¬´íš¨?™”?‹œ?‚¨?‹¤.
             session.invalidate();
             request.setAttribute("viewUrl", "redirect:login");
         }

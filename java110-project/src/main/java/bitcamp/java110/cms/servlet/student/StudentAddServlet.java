@@ -53,7 +53,7 @@ public class StudentAddServlet extends HttpServlet {
                 iocContainer.getBean(StudentService.class);
         
         try {
-            // ì‚¬ì§„ ë°ì´í„° ì²˜ë¦¬
+            // ?‚¬ì§? ?°?´?„° ì²˜ë¦¬
             Part part = request.getPart("file1");
             if (part.getSize() > 0) {
                 String filename = UUID.randomUUID().toString();
@@ -67,7 +67,7 @@ public class StudentAddServlet extends HttpServlet {
             
         } catch(Exception e) {
             request.setAttribute("error", e);
-            request.setAttribute("message", "í•™ìƒ ë“±ë¡ ì˜¤ë¥˜!");
+            request.setAttribute("message", "?•™?ƒ ?“±ë¡? ?˜¤ë¥?!");
             request.setAttribute("refresh", "3;url=list");
             
 
