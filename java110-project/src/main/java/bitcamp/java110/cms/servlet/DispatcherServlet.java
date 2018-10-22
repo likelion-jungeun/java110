@@ -20,27 +20,27 @@ public class DispatcherServlet extends HttpServlet {
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
         
-        // ?´?¼?´?–¸?Š¸ê°? ?š”ì²??•œ URL?—?„œ /app ?‹¤?Œ?— ì§?? •?•œ ê²½ë¡œë¥? ì¶”ì¶œ?•œ?‹¤.
+        // í´ë¼ì´ì–¸íŠ¸ê°€ ìš”ì²­í•œ URLì—ì„œ /app ë‹¤ìŒì— ì§€ì •í•œ ê²½ë¡œë¥¼ ì¶”ì¶œí•œë‹¤.
         String pageControllerPath = request.getPathInfo();
         
-        // ?Š¤?”„ë§? IoC ì»¨í…Œ?´?„ˆ ê°?? ¸?˜¤ê¸?
+        // ìŠ¤í”„ë§ IoC ì»¨í…Œì´ë„ˆ ê°€ì ¸ì˜¤ê¸°
         ApplicationContext iocContainer = 
                 (ApplicationContext)this.getServletContext()
                                         .getAttribute("iocContainer");
         
         try {
-            // IoC ì»¨í…Œ?´?„ˆ?—?„œ ?˜?´ì§? ì»¨íŠ¸ë¡¤ëŸ¬ë¥? ì°¾ëŠ”?‹¤.
+            // IoC ì»¨í…Œì´ë„ˆì—ì„œ í˜ì´ì§€ ì»¨íŠ¸ë¡¤ëŸ¬ë¥¼ ì°¾ëŠ”ë‹¤.
             PageController controller = 
                 (PageController) iocContainer.getBean(pageControllerPath);
             
-            // PageController ?‹¤?–‰
+            // PageController ì‹¤í–‰
             String viewUrl = controller.service(request, response);
             
             if (viewUrl.startsWith("redirect:")) {
                 response.sendRedirect(viewUrl.substring(9));
                 
             } else {
-                // ?˜?´ì§? ì»¨íŠ¸ë¡¤ëŸ¬ê°? ì§?? •?•œ URL?„ ?‹¤?–‰
+                // í˜ì´ì§€ ì»¨íŠ¸ë¡¤ëŸ¬ê°€ ì§€ì •í•œ URLì„ ì‹¤í–‰
                 response.setContentType("text/html;charset=UTF-8");
                 RequestDispatcher rd = 
                         request.getRequestDispatcher(viewUrl);
@@ -49,7 +49,7 @@ public class DispatcherServlet extends HttpServlet {
             
         } catch (Exception e) {
             request.setAttribute("error", e);
-            request.setAttribute("message", "?‹¤?–‰ ?˜¤ë¥?!");
+            request.setAttribute("message", "ì‹¤í–‰ ì˜¤ë¥˜!");
 
             response.setContentType("text/html;charset=UTF-8");
             RequestDispatcher rd = 

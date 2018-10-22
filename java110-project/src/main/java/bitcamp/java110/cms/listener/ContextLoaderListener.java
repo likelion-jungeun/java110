@@ -12,7 +12,7 @@ import bitcamp.java110.cms.AppConfig;
 public class ContextLoaderListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        System.out.println("ContextLoaderListener.contextInitialized() ?‹¤?–‰!");
+        System.out.println("ContextLoaderListener.contextInitialized() ì‹¤í–‰!");
         
         ServletContext sc = sce.getServletContext();
 

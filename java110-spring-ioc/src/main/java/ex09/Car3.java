@@ -1,8 +1,11 @@
-package ex04;
+package ex09;
 
 import java.sql.Date;
 
-public class Car {
+import org.springframework.stereotype.Component;
+
+@Component
+public class Car3 {
     private int no;
     private String model;
     private String maker;
@@ -10,27 +13,12 @@ public class Car {
     private Date createdDate;
     private Engine engine;
     
-    public Car() {
-        System.out.println("Car() ?��출됨!");
-    }
-    
-    public Car(String model, int cc) {
-        this.model = model;
-        this.cc = cc;
-        System.out.println("Car(String,int) ?��출됨!");
-    }
-    
-    public Car(int cc, String maker) {
-        this.maker = maker;
-        this.cc = cc;
-        System.out.println("Car(int,String) ?��출됨!");
-    }
-    
-    public Car(String model, int cc, Engine engine) {
-        this.model = model;
-        this.cc = cc;
+    // 스프링 IoC 컨테이너는 
+    // 생성자가 한 개일 때 파라미터에 해당하는 타입의 객체를 자동 주입한다.
+    // => 파라미터에 @Autowired를 붙여도 되고, 생략해도 된다.
+    public Car3(/*@Autowired*/ Engine engine) {
+        System.out.println("Car(Engine) 호출됨!");
         this.engine = engine;
-        System.out.println("Car(String,int,Engine) ?��출됨!");
     }
 
     public int getNo() {
@@ -75,10 +63,6 @@ public class Car {
     
     public Engine getEngine() {
         return engine;
-    }
-
-    public void setEngine(Engine engine) {
-        this.engine = engine;
     }
 
     @Override
