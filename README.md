@@ -1,6 +1,13 @@
 # java110
 비트캠프 **자바 110기** 실습 프로젝트
 
+## v6.1 - 181022
+
+- Front Controller 도입
+  -> Facade 디자인 패턴 적용
+- 작업
+  -> 컨트롤러들의 공통 기능을 분리하여 DispatcherServlet에서 처리한다.
+
 ## v6.0 - 181019
 
 - Mybatis와 Spring IoC 컨테이너 연동
