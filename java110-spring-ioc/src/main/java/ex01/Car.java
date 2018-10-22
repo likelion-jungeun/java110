@@ -10,19 +10,19 @@ public class Car {
     private Date createdDate;
     
     public Car() {
-        System.out.println("Car() 호출됨!");
+        System.out.println("Car() ?��출됨!");
     }
     
     public Car(String model, int cc) {
         this.model = model;
         this.cc = cc;
-        System.out.println("Car(String,int) 호출됨!");
+        System.out.println("Car(String,int) ?��출됨!");
     }
     
     public Car(int cc, String model) {
         this.model = model;
         this.cc = cc;
-        System.out.println("Car(int,String) 호출됨!");
+        System.out.println("Car(int,String) ?��출됨!");
     }
 
     public int getNo() {
