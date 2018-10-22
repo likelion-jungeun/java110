@@ -1,69 +1,53 @@
-package bitcamp.java110.cms.servlet.auth;
- 
-import java.io.IOException;
-import java.util.ArrayList;
- 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+package bitcamp.java110.cms.web.auth;
+
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.context.ApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import bitcamp.java110.cms.domain.Member;
+import bitcamp.java110.cms.mvc.RequestMapping;
 import bitcamp.java110.cms.service.AuthService;
 
-@WebServlet("/auth/login")
-public class LoginServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+@Component
+public class LoginController {
 
-    @Override
-    protected void doGet(
-            HttpServletRequest request, 
-            HttpServletResponse response) 
-                    throws ServletException, IOException {
-        
-        request.setAttribute("viewUrl", "/auth/form.jsp");
-       
-    }
+    @Autowired
+    AuthService authService;
     
-    @Override
-    protected void doPost(
+    @RequestMapping("/auth/login")
+    public String login(
             HttpServletRequest request, 
-            HttpServletResponse response) 
-                    throws ServletException, IOException {
-
+            HttpServletResponse response) {
+        
+        if (request.getMethod().equals("GET")) {
+            return  "/auth/form.jsp";
+        }
+        
         String type = request.getParameter("type");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String save = request.getParameter("save");
         
-        ArrayList<Cookie> cookies = new ArrayList<>();
-        
-        if (save != null) {// ?��메일 ???��?��기�?? 체크?��?���?,
+        if (save != null) {// 이메일 저장하기를 체크했다면,
             Cookie cookie = new Cookie("email", email);
             cookie.setMaxAge(60 * 60 * 24 * 15);
-            cookies.add(cookie);
+            response.addCookie(cookie);
             
-        } else {// ?��메일?�� ???��?���? ?���? ?��?���?,
+        } else {// 이메일을 저장하고 싶지 않다면,
             Cookie cookie = new Cookie("email", "");
             cookie.setMaxAge(0);
-            cookies.add(cookie);
+            response.addCookie(cookie);
         }
-        
-        ApplicationContext iocContainer = 
-                (ApplicationContext)this.getServletContext()
-                                        .getAttribute("iocContainer");
-        AuthService authService = iocContainer.getBean(AuthService.class);
         
         Member loginUser = authService.getMember(email, password, type);
         
         HttpSession session = request.getSession();
         if (loginUser != null) {
-            // ?��?�� ?��보�?? ?��?��?�� 보�??��?��.
+            // 회원 정보를 세션에 보관한다.
             session.setAttribute("loginUser", loginUser);
             String redirectUrl = null;
             
@@ -78,16 +62,12 @@ public class LoginServlet extends HttpServlet {
                 redirectUrl = "../manager/list";
                 break; 
             }
-            request.setAttribute("viewUrl", "redirect:"+redirectUrl);
+            return "redirect:" + redirectUrl;
             
         } else {
-            // 로그?�� ?�� ?��?��?��?�� ?���? ?��?��?���? 로그?��?�� ?��?��?��?���? 
-            // ?��?��?��?���? 무조�? ?��?��?�� 무효?��?��?��?��.
             session.invalidate();
-            request.setAttribute("viewUrl", "redirect:login");
+            return "redirect:login";
         }
-        
-        request.setAttribute("cookies", cookies);
     }
 }
 

@@ -13,11 +13,11 @@ public class Car3 {
     private Date createdDate;
     private Engine engine;
     
-    // ìŠ¤í”„ë§ IoC ì»¨í…Œì´ë„ˆëŠ” 
-    // ìƒì„±ìê°€ í•œ ê°œì¼ ë•Œ íŒŒë¼ë¯¸í„°ì— í•´ë‹¹í•˜ëŠ” íƒ€ì…ì˜ ê°ì²´ë¥¼ ìë™ ì£¼ì…í•œë‹¤.
-    // => íŒŒë¼ë¯¸í„°ì— @Autowiredë¥¼ ë¶™ì—¬ë„ ë˜ê³ , ìƒëµí•´ë„ ëœë‹¤.
+    // ?Š¤?”„ë§? IoC ì»¨í…Œ?´?„ˆ?Š” 
+    // ?ƒ?„±?ê°? ?•œ ê°œì¼ ?•Œ ?ŒŒ?¼ë¯¸í„°?— ?•´?‹¹?•˜?Š” ???…?˜ ê°ì²´ë¥? ??™ ì£¼ì…?•œ?‹¤.
+    // => ?ŒŒ?¼ë¯¸í„°?— @Autowiredë¥? ë¶™ì—¬?„ ?˜ê³?, ?ƒ?µ?•´?„ ?œ?‹¤.
     public Car3(/*@Autowired*/ Engine engine) {
-        System.out.println("Car(Engine) í˜¸ì¶œë¨!");
+        System.out.println("Car(Engine) ?˜¸ì¶œë¨!");
         this.engine = engine;
     }
 
