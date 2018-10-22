@@ -40,14 +40,14 @@ public class DataSource {
         while (connections.size() > 0) {
             con = connections.remove(0);
             if (!con.isClosed() && con.isValid(3)) {
-                System.out.println("ê¸°ì¡´ ì»¤ë„¥ì…˜ ì‚¬ìš©!");
+                System.out.println("ê¸°ì¡´ ì»¤ë„¥?…˜ ?‚¬?š©!");
                 break;
             }
             con = null;
         }
         
         if (con == null) {
-            System.out.println("ìƒˆ ì»¤ë„¥ì…˜ ì‚¬ìš©!");
+            System.out.println("?ƒˆ ì»¤ë„¥?…˜ ?‚¬?š©!");
             con = DriverManager.getConnection(url, username, password);
         }
         
@@ -70,7 +70,7 @@ public class DataSource {
             local.remove();
         }
         if (local.get() == null) {
-            // íŠ¸ëœì­ì…˜ìœ¼ë¡œ ì‚¬ìš©í•˜ëŠ” ì»¤ë„¥ì…˜ì´ ì•„ë‹Œ ê²½ìš°ì—ë§Œ ì»¤ë„¥ì…˜í’€ì— ë°˜ë‚©í•œë‹¤.
+            // ?Š¸?œ?­?…˜?œ¼ë¡? ?‚¬?š©?•˜?Š” ì»¤ë„¥?…˜?´ ?•„?‹Œ ê²½ìš°?—ë§? ì»¤ë„¥?…˜???— ë°˜ë‚©?•œ?‹¤.
             connections.add(con);
         }
     }

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import bitcamp.java110.cms.domain.Manager;
 import bitcamp.java110.cms.service.ManagerService;
 import bitcamp.java110.cms.web.PageController;
-
+ 
 @Component("/manager/list")
 public class ManagerListController implements PageController { 
     

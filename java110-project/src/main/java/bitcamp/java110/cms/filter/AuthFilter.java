@@ -31,7 +31,7 @@ public class AuthFilter implements Filter {
         if (servletPath.endsWith("add") ||
             servletPath.endsWith("delete")) {
             
-            // Î°úÍ∑∏Ïù∏ Ïó¨Î∂Ä Í≤ÄÏÇ¨
+            // Î°úÍ∑∏?ù∏ ?ó¨Î∂? Í≤??Ç¨
             HttpSession session = httpRequest.getSession();
             Member loginUser = (Member)session.getAttribute("loginUser");
             if (loginUser == null) {
