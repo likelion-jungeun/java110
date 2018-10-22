@@ -1,5 +1,5 @@
 package bitcamp.java110.cms.servlet.auth;
-
+ 
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -43,12 +43,12 @@ public class LoginServlet extends HttpServlet {
         
         ArrayList<Cookie> cookies = new ArrayList<>();
         
-        if (save != null) {// ?´ë©”ì¼ ???¥?•˜ê¸°ë?? ì²´í¬?–ˆ?‹¤ë©?,
+        if (save != null) {// ?ï¿½ï¿½ë©”ì¼ ???ï¿½ï¿½?ï¿½ï¿½ê¸°ï¿½?? ì²´í¬?ï¿½ï¿½?ï¿½ï¿½ï¿½?,
             Cookie cookie = new Cookie("email", email);
             cookie.setMaxAge(60 * 60 * 24 * 15);
             cookies.add(cookie);
             
-        } else {// ?´ë©”ì¼?„ ???¥?•˜ê³? ?‹¶ì§? ?•Š?‹¤ë©?,
+        } else {// ?ï¿½ï¿½ë©”ì¼?ï¿½ï¿½ ???ï¿½ï¿½?ï¿½ï¿½ï¿½? ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½ï¿½?,
             Cookie cookie = new Cookie("email", "");
             cookie.setMaxAge(0);
             cookies.add(cookie);
@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
         
         HttpSession session = request.getSession();
         if (loginUser != null) {
-            // ?šŒ?› ? •ë³´ë?? ?„¸?…˜?— ë³´ê??•œ?‹¤.
+            // ?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ë³´ï¿½?? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ë³´ï¿½??ï¿½ï¿½?ï¿½ï¿½.
             session.setAttribute("loginUser", loginUser);
             String redirectUrl = null;
             
@@ -81,8 +81,8 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("viewUrl", "redirect:"+redirectUrl);
             
         } else {
-            // ë¡œê·¸?¸ ?œ ?ƒ?ƒœ?—?„œ ?‹¤ë¥? ?‚¬?š©?ë¡? ë¡œê·¸?¸?„ ?‹œ?„?•˜?‹¤ê°? 
-            // ?‹¤?Œ¨?•œ?‹¤ë©? ë¬´ì¡°ê±? ?„¸?…˜?„ ë¬´íš¨?™”?‹œ?‚¨?‹¤.
+            // ë¡œê·¸?ï¿½ï¿½ ?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½? ë¡œê·¸?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½? 
+            // ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ï¿½? ë¬´ì¡°ï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ë¬´íš¨?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½.
             session.invalidate();
             request.setAttribute("viewUrl", "redirect:login");
         }
