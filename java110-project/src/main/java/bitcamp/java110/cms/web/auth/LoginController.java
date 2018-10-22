@@ -14,26 +14,23 @@ import bitcamp.java110.cms.web.PageController;
 
 @Component("/auth/login")
 public class LoginController implements PageController {
-    
+
     @Autowired
     AuthService authService;
-
+    
     @Override
     public String service(
             HttpServletRequest request, 
             HttpServletResponse response) {
         
-        if(request.getMethod().equals("GET")) {
-            
-            return "/auth/form.jsp";
+        if (request.getMethod().equals("GET")) {
+            return  "/auth/form.jsp";
         }
-       
-        // POST 요청이면 
+        
         String type = request.getParameter("type");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String save = request.getParameter("save");
-        
         
         if (save != null) {// 이메일 저장하기를 체크했다면,
             Cookie cookie = new Cookie("email", email);
@@ -45,7 +42,6 @@ public class LoginController implements PageController {
             cookie.setMaxAge(0);
             response.addCookie(cookie);
         }
-        
         
         Member loginUser = authService.getMember(email, password, type);
         
@@ -66,13 +62,12 @@ public class LoginController implements PageController {
                 redirectUrl = "../manager/list";
                 break; 
             }
-            return "redirect:"+redirectUrl;
+            return "redirect:" + redirectUrl;
             
         } else {
             session.invalidate();
             return "redirect:login";
         }
-        
     }
 }
 

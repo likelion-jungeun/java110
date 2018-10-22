@@ -11,9 +11,8 @@ import bitcamp.java110.cms.service.StudentService;
 import bitcamp.java110.cms.web.PageController;
 
 @Component("/student/detail")
-public class StudentDetailController implements PageController {
-   
-  
+public class StudentDetailController implements PageController { 
+    
     @Autowired
     StudentService studentService;
     
@@ -22,14 +21,10 @@ public class StudentDetailController implements PageController {
             HttpServletRequest request, 
             HttpServletResponse response) {
 
-        
         int no = Integer.parseInt(request.getParameter("no"));
-        
         Student s = studentService.get(no);
-        
         request.setAttribute("student", s);
         return "/student/detail.jsp";
-       
     }
 
 }

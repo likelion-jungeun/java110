@@ -13,11 +13,11 @@ import bitcamp.java110.cms.service.StudentService;
 import bitcamp.java110.cms.web.PageController;
 
 @Component("/student/list")
-public class StudentListController implements PageController{
+public class StudentListController implements PageController { 
     
     @Autowired
     StudentService studentService;
-  
+    
     @Override
     public String service(
             HttpServletRequest request, 
@@ -38,10 +38,8 @@ public class StudentListController implements PageController{
                 pageSize = 3;
         }
         
-        
         List<Student> list = studentService.list(pageNo, pageSize);
         request.setAttribute("list", list);
         return "/student/list.jsp";
-        
     }
 }

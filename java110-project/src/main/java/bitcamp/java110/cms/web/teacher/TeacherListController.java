@@ -13,7 +13,7 @@ import bitcamp.java110.cms.service.TeacherService;
 import bitcamp.java110.cms.web.PageController;
 
 @Component("/teacher/list")
-public class TeacherListController implements PageController{
+public class TeacherListController implements PageController { 
     
     @Autowired
     TeacherService teacherService;
@@ -38,11 +38,8 @@ public class TeacherListController implements PageController{
                 pageSize = 3;
         }
         
-        
         List<Teacher> list = teacherService.list(pageNo, pageSize);
-       
         request.setAttribute("list", list);
         return "/teacher/list.jsp";
- 
     }
 }

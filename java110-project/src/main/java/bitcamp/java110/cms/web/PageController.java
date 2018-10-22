@@ -7,7 +7,4 @@ public interface PageController {
     String service(
             HttpServletRequest request, 
             HttpServletResponse response) throws Exception;
-    
-    
-
 }

@@ -13,50 +13,62 @@ import org.springframework.context.ApplicationContext;
 import bitcamp.java110.cms.web.PageController;
 
 public class DispatcherServlet extends HttpServlet {
-
     private static final long serialVersionUID = 1L;
 
     @Override
     protected void service(
-            HttpServletRequest request,
-            HttpServletResponse response) throws ServletException, IOException{
-
-        // í´ë¼ì´ì–¸íŠ¸ê°€ ìš”ì²­í•œ URLì—ì„œ /app ë‹¤ìŒì— ì§€ì •í•œ ê²½ë¡œë¥¼ ì¶”ì¶œí•œë‹¤.
-        String pageControllerPath =request.getPathInfo();
-
-        // ìŠ¤í”„ë§ IoC ì»¨í…Œì´ë„ˆ ê°€ì ¸ì˜¤ê¸°
+            HttpServletRequest request, 
+            HttpServletResponse response) throws ServletException, IOException {
+        
+        // ?´?¼?´?–¸?Š¸ê°? ?š”ì²??•œ URL?—?„œ /app ?‹¤?Œ?— ì§?? •?•œ ê²½ë¡œë¥? ì¶”ì¶œ?•œ?‹¤.
+        String pageControllerPath = request.getPathInfo();
+        
+        // ?Š¤?”„ë§? IoC ì»¨í…Œ?´?„ˆ ê°?? ¸?˜¤ê¸?
         ApplicationContext iocContainer = 
                 (ApplicationContext)this.getServletContext()
                                         .getAttribute("iocContainer");
         
-        // IoC ì»¨í…Œì´ë„ˆì—ì„œ í˜ì´ì§€ ì»¨íŠ¸ë¡¤ëŸ¬ë¥¼ ì°¾ëŠ”ë‹¤.
         try {
-        PageController controller = 
-                (PageController)iocContainer.getBean(pageControllerPath);
-        
-            // PageController ì‹¤í–‰
+            // IoC ì»¨í…Œ?´?„ˆ?—?„œ ?˜?´ì§? ì»¨íŠ¸ë¡¤ëŸ¬ë¥? ì°¾ëŠ”?‹¤.
+            PageController controller = 
+                (PageController) iocContainer.getBean(pageControllerPath);
+            
+            // PageController ?‹¤?–‰
             String viewUrl = controller.service(request, response);
             
-            if(viewUrl.startsWith("redirect:")) {
+            if (viewUrl.startsWith("redirect:")) {
                 response.sendRedirect(viewUrl.substring(9));
-            }else {
-                // í˜ì´ì§€ ì»¨íŠ¸ë¡¤ëŸ¬ê°€ ì§€ì •í•œ URLì„ ì‹¤í–‰
+                
+            } else {
+                // ?˜?´ì§? ì»¨íŠ¸ë¡¤ëŸ¬ê°? ì§?? •?•œ URL?„ ?‹¤?–‰
                 response.setContentType("text/html;charset=UTF-8");
-                RequestDispatcher rd=
+                RequestDispatcher rd = 
                         request.getRequestDispatcher(viewUrl);
                 rd.include(request, response);
             }
             
-        }catch(Exception e){
-
+        } catch (Exception e) {
             request.setAttribute("error", e);
-            request.setAttribute("message", "ì‹¤í–‰ ì˜¤ë¥˜!!");
+            request.setAttribute("message", "?‹¤?–‰ ?˜¤ë¥?!");
+
             response.setContentType("text/html;charset=UTF-8");
-            
-            RequestDispatcher rd=
+            RequestDispatcher rd = 
                     request.getRequestDispatcher("/error.jsp");
-            
             rd.include(request, response);
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

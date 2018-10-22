@@ -10,24 +10,19 @@ import bitcamp.java110.cms.service.TeacherService;
 import bitcamp.java110.cms.web.PageController;
 
 @Component("/teacher/delete")
-public class TeacherDeleteController implements PageController {
+public class TeacherDeleteController implements PageController { 
     
-
     @Autowired
     TeacherService teacherService;
     
     @Override
     public String service(
             HttpServletRequest request, 
-            HttpServletResponse response)  {
+            HttpServletResponse response) throws Exception {
 
         int no = Integer.parseInt(request.getParameter("no"));
-       
-            teacherService.delete(no);
-            return "redirect:list";
-            
-       
-        
+        teacherService.delete(no);
+        return "redirect:list";
     }
 
 }

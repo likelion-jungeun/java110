@@ -11,7 +11,7 @@ import bitcamp.java110.cms.service.TeacherService;
 import bitcamp.java110.cms.web.PageController;
 
 @Component("/teacher/detail")
-public class TeacherDetailController implements PageController  {
+public class TeacherDetailController implements PageController { 
     
     @Autowired
     TeacherService teacherService;
@@ -22,12 +22,9 @@ public class TeacherDetailController implements PageController  {
             HttpServletResponse response) {
 
         int no = Integer.parseInt(request.getParameter("no"));
-        
-        
         Teacher t = teacherService.get(no);
         request.setAttribute("teacher", t);
         return "/teacher/detail.jsp";
-        
     }
 
 }

@@ -2,7 +2,6 @@ package bitcamp.java110.cms.web.student;
 
 import java.util.UUID;
 
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
@@ -14,23 +13,21 @@ import bitcamp.java110.cms.domain.Student;
 import bitcamp.java110.cms.service.StudentService;
 import bitcamp.java110.cms.web.PageController;
 
-@MultipartConfig(maxFileSize=2_000_000)
 @Component("/student/add")
-public class StudentAddController implements PageController  {
-    
+public class StudentAddController implements PageController {
+
     @Autowired
     StudentService studentService;
-
+    
     @Override
     public String service(
             HttpServletRequest request, 
-            HttpServletResponse response) throws Exception{
-
-        if(request.getMethod().equals("GET")) {
-        return "/student/form.jsp";
+            HttpServletResponse response) throws Exception {
         
-    }
-   
+        if (request.getMethod().equals("GET")) {
+            return "/student/form.jsp";
+        }
+
         request.setCharacterEncoding("UTF-8");
         
         Student s = new Student();
@@ -41,19 +38,17 @@ public class StudentAddController implements PageController  {
         s.setSchool(request.getParameter("school"));
         s.setWorking(Boolean.parseBoolean(request.getParameter("working")));
         
-        
-            // 사진 데이터 처리
-            Part part = request.getPart("file1");
-            if (part.getSize() > 0) {
-                String filename = UUID.randomUUID().toString();
-                part.write(request.getServletContext()
-                           .getRealPath("/upload/" + filename));
-                s.setPhoto(filename);
-            }
-         
-            studentService.add(s);
-            return "redirect:list";
+        Part part = request.getPart("file1");
+        if (part.getSize() > 0) {
+            String filename = UUID.randomUUID().toString();
+            part.write(request.getServletContext()
+                       .getRealPath("/upload/" + filename));
+            s.setPhoto(filename);
         }
         
+        studentService.add(s);
+        return "redirect:list";
+        
     }
-
+ 
+}

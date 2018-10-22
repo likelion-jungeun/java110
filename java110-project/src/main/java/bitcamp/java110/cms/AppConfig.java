@@ -16,7 +16,7 @@ import org.springframework.core.env.Environment;
 @ComponentScan(basePackages="bitcamp.java110.cms")
 @PropertySource("classpath:/bitcamp/java110/cms/conf/jdbc.properties")
 
-// Mybatisì—ì„œ ìë™ìœ¼ë¡œ DAOë¥¼ ìƒì„±í•  ë•Œ ì‚¬ìš©í•  ì¸í„°í˜ì´ìŠ¤ê°€ ë“¤ì–´ ìˆëŠ” íŒ¨í‚¤ì§€ ì„¤ì • 
+// Mybatis?—?„œ ??™?œ¼ë¡? DAOë¥? ?ƒ?„±?•  ?•Œ ?‚¬?š©?•  ?¸?„°?˜?´?Š¤ê°? ?“¤?–´ ?ˆ?Š” ?Œ¨?‚¤ì§? ?„¤? • 
 @MapperScan("bitcamp.java110.cms.dao")
 public class AppConfig {
     
@@ -25,7 +25,7 @@ public class AppConfig {
     
     @Bean(destroyMethod="close")
     public DataSource dataSource() {
-        System.out.println("DataSource ê°ì²´ ìƒì„±!");
+        System.out.println("DataSource ê°ì²´ ?ƒ?„±!");
         
         BasicDataSource ds = new BasicDataSource();
         ds.setDriverClassName(env.getProperty("jdbc.driver"));
@@ -41,20 +41,20 @@ public class AppConfig {
     public SqlSessionFactory sqlSessionFactory(
             DataSource dataSource,
             ApplicationContext appCtx) {
-        System.out.println("SqlSessionFactory ê°ì²´ ìƒì„±!");
+        System.out.println("SqlSessionFactory ê°ì²´ ?ƒ?„±!");
         
         try {
             SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
             
-            // DB ì»¤ë„¥ì…˜í’€ì„ ê´€ë¦¬í•´ì£¼ëŠ” ê°ì²´ë¥¼ ê¼½ëŠ”ë‹¤.
+            // DB ì»¤ë„¥?…˜???„ ê´?ë¦¬í•´ì£¼ëŠ” ê°ì²´ë¥? ê¼½ëŠ”?‹¤.
             factory.setDataSource(dataSource);
             
-            // SQL ë§µí¼ íŒŒì¼ì—ì„œ ë„ë©”ì¸ ê°ì²´ì˜ ë³„ëª…ì„ ì‚¬ìš©í•˜ë ¤ë©´ 
-            // ë„ë©”ì¸ ê°ì²´ê°€ ë“¤ì–´ ìˆëŠ” íŒ¨í‚¤ì§€ë¥¼ ì§€ì •í•´ì•¼ í•œë‹¤. 
-            // ê·¸ëŸ¬ë©´ Mybatisê°€ í•´ë‹¹ íŒ¨í‚¤ì§€ì˜ ëª¨ë“  í´ë˜ìŠ¤ì— ëŒ€í•´ ë³„ëª…ì„ ìë™ìœ¼ë¡œ ìƒì„±í•  ê²ƒì´ë‹¤.
+            // SQL ë§µí¼ ?ŒŒ?¼?—?„œ ?„ë©”ì¸ ê°ì²´?˜ ë³„ëª…?„ ?‚¬?š©?•˜? ¤ë©? 
+            // ?„ë©”ì¸ ê°ì²´ê°? ?“¤?–´ ?ˆ?Š” ?Œ¨?‚¤ì§?ë¥? ì§?? •?•´?•¼ ?•œ?‹¤. 
+            // ê·¸ëŸ¬ë©? Mybatisê°? ?•´?‹¹ ?Œ¨?‚¤ì§??˜ ëª¨ë“  ?´?˜?Š¤?— ???•´ ë³„ëª…?„ ??™?œ¼ë¡? ?ƒ?„±?•  ê²ƒì´?‹¤.
             factory.setTypeAliasesPackage("bitcamp.java110.cms.domain");
             
-            // SQL ë§µí¼ íŒŒì¼ ê²½ë¡œë¥¼ ë“±ë¡í•œë‹¤.
+            // SQL ë§µí¼ ?ŒŒ?¼ ê²½ë¡œë¥? ?“±ë¡í•œ?‹¤.
             factory.setMapperLocations(appCtx.getResources(
                     "classpath:/bitcamp/java110/cms/mapper/**/*.xml"));
             
