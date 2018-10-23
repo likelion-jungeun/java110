@@ -1,17 +1,26 @@
 # java110
 비트캠프 **자바 110기** 실습 프로젝트
 
+## v6.7 - 181023
+
+- 기존 라이브러리를 Spring WebMVC로 교체하기
+- 작업
+    -> 'spring-webmvc' 라이브러리를 추가한다.
+    -> DispatcherServlet을 Spring WebMVC 클래스로 교체한다.
+    -> CharacterEncodingFilter를 Spring WebMVC 클래스로 교체한다.
+    -> 페이지 컨트롤러에서 사용하는 애노테이션을 Spring 애노테이션으로 교체한다.
+
 ## v6.6 - 181023
 
 - 요청 처리 메서드에서 클라이언트가 보낸 값 바로 받기
-  -> @RequestParam 애노테이션으로 클라이언트가 보낸 값 바로 받기
+    -> @RequestParam 애노테이션으로 클라이언트가 보낸 값 바로 받기
 - 클라이언트가 보낸 값의 한글 처리하기
-  -> 필터에서 처리한다.
+    -> 필터에서 처리한다.
 - 작업
-  -> @RequestParam 애노테이션 정의
-  -> 프론트 컨트롤러(DispatcherServlet)를 변경한다.
-  -> 각 페이지 컨트롤러의 메서드도 변경한다.
-  -> CharacterEncodingFilter 클래스 추가한다.
+    -> @ReuqestParam 애노테이션 정의
+    -> 프론트 컨트롤러(Dispatcher) 변경한다.
+    -> 각 페이지 컨트롤러의 메서드도 변경한다.
+    -> CharacterEncodingFileter 클래스 추가한다.
 
 ## v6.5 - 181022
 
