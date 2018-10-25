@@ -18,12 +18,10 @@ import org.springframework.core.env.Environment;
 @MapperScan("bitcamp.java110.cms.dao")
 public class AppConfig {
     
-    
     @Autowired
     Environment env;
     
     public AppConfig() {
-        
         System.out.println("AppConfig() 호출됨!");
     }
     
@@ -68,7 +66,6 @@ public class AppConfig {
         }
     }
     
-  
 /*
     public static void main(String[] args) {
         

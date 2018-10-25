@@ -27,26 +27,27 @@ public class TeacherController {
     
     @RequestMapping("/teacher/list")
     public String list(
-            @RequestParam(value="pageNo", defaultValue="1") int pageNo,
-            @RequestParam(value="pageSize", defaultValue="3") int pageSize,
+            @RequestParam(value="pageNo",defaultValue="1") int pageNo,
+            @RequestParam(value="pageSize",defaultValue="3") int pageSize,
             Map<String,Object> map) {
 
         if (pageNo < 1)
-                pageNo = 1;
+            pageNo = 1;
         
         if (pageSize < 3 || pageSize > 10)
-                pageSize = 3;
-        
+            pageSize = 3;
         
         List<Teacher> list = teacherService.list(pageNo, pageSize);
         map.put("list", list);
+        
         return "/teacher/list.jsp";
     }
     
     @RequestMapping("/teacher/detail")
-    public String detail(int no,
+    public String detail(
+            int no,
             Map<String,Object> map) {
-        
+
         Teacher t = teacherService.get(no);
         map.put("teacher", t);
         return "/teacher/detail.jsp";
@@ -60,7 +61,7 @@ public class TeacherController {
         if (request.getMethod().equals("GET")) {
             return "/teacher/form.jsp";
         }
-       
+        
         Part part = request.getPart("file1");
         if (part.getSize() > 0) {
             String filename = UUID.randomUUID().toString();
@@ -69,13 +70,13 @@ public class TeacherController {
         }
         
         teacherService.add(teacher);
+
         return "redirect:list";
-        
     }
     
     @RequestMapping("/teacher/delete")
     public String delete(int no) throws Exception {
-        
+
         teacherService.delete(no);
         return "redirect:list";
     }

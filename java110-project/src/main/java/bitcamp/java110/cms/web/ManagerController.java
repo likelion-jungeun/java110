@@ -18,45 +18,46 @@ import bitcamp.java110.cms.service.ManagerService;
 
 @Controller
 public class ManagerController { 
-
+    
     @Autowired
     ManagerService managerService;
-
+    
     @Autowired
     ServletContext sc;
-
+    
     @RequestMapping("/manager/list")
     public String list(
-            @RequestParam(value="pageNo", defaultValue="1") int pageNo,
-            @RequestParam(value="pageSize", defaultValue="3") int pageSize,
+            @RequestParam(value="pageNo",defaultValue="1") int pageNo,
+            @RequestParam(value="pageSize",defaultValue="3") int pageSize,
             Map<String,Object> map) {
-
+        
         if (pageNo < 1)
             pageNo = 1;
-
+        
         if (pageSize < 3 || pageSize > 10)
             pageSize = 3;
-
+        
         List<Manager> list = managerService.list(pageNo, pageSize);
         map.put("list", list);
+        
         return "/manager/list.jsp";
     }
-
+    
     @RequestMapping("/manager/detail")
     public String detail(
             int no,
             Map<String,Object> map) {
-
+        
         Manager m = managerService.get(no);
         map.put("manager", m);
         return "/manager/detail.jsp";
     }
-
+    
     @RequestMapping("/manager/add")
     public String add(
             Manager manager,
             HttpServletRequest request) throws Exception {
-
+        
         if (request.getMethod().equals("GET")) {
             return "/manager/form.jsp";
         }
@@ -68,18 +69,19 @@ public class ManagerController {
             part.write(sc.getRealPath("/upload/" + filename));
             manager.setPhoto(filename);
         }
-
+        
         managerService.add(manager);
+        
         return "redirect:list";
     }
-
+    
     @RequestMapping("/manager/delete")
     public String delete(int no) throws Exception {
-
+        
         managerService.delete(no);
         return "redirect:list";
     }
-
+    
 }
 
 

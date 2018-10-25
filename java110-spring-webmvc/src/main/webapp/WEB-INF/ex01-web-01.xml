@@ -8,25 +8,11 @@
   metadata-complete="false">
 
     <description>
-       미니 프로젝트로 [수업 관리 시스템]을 구현한 웹 애플리케이션이다. 
+       Spring WebMVC 테스트
     </description>
-    <display-name>Classroom Management System(CMS)</display-name>
+    
+    <display-name>Spring WebMVC 테스트</display-name>
 
-    <!-- 컨텍스트 초기화 파라미터 설정 -->
-    
-    <!--
-       다음 태그가 지원이 안되는 경우,
-       request.setCharacterEncoding()으로 POST 요청 한글 데이터를 처리해야 한다.  
-    <request-character-encoding>UTF-8</request-character-encoding>
-    -->
-    
-    <!-- 리스너 배치하기 -->
-    <!--  
-    <listener>
-        <listener-class>bitcamp.java110.cms.listener.ContextLoaderListener</listener-class>
-    </listener>
-    -->
-    
     <!-- 필터 배치하기 -->
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
@@ -48,16 +34,10 @@
         <servlet-name>app</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         
-        <!-- 프론트 컨트롤러가 사용할 IoC 컨테이너 클래스를 지정하기 -->
-        <init-param>
-            <param-name>contextClass</param-name>
-            <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
-        </init-param>
-        
-        <!-- 위에서 지정한 IoC 컨테이너가 사용할 Java config 클래스 -->
+        <!-- 프론트 컨트롤러의 IoC 컨테이너가 사용할 설정 파일 지정 -->
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>bitcamp.java110.cms.AppConfig</param-value>
+            <param-value>/WEB-INF/app-servlet.xml</param-value>
         </init-param>
         
         <load-on-startup>1</load-on-startup>
