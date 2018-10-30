@@ -17,26 +17,26 @@ public class Car {
     private Map<String,Object> options;
     
     public Car() {
-        System.out.println("Car() ?��출됨!");
+        System.out.println("Car() 호출됨!");
     }
     
     public Car(String model, int cc) {
         this.model = model;
         this.cc = cc;
-        System.out.println("Car(String,int) ?��출됨!");
+        System.out.println("Car(String,int) 호출됨!");
     }
     
     public Car(int cc, String maker) {
         this.maker = maker;
         this.cc = cc;
-        System.out.println("Car(int,String) ?��출됨!");
+        System.out.println("Car(int,String) 호출됨!");
     }
     
     public Car(String model, int cc, Engine engine) {
         this.model = model;
         this.cc = cc;
         this.engine = engine;
-        System.out.println("Car(String,int,Engine) ?��출됨!");
+        System.out.println("Car(String,int,Engine) 호출됨!");
     }
 
     public int getNo() {

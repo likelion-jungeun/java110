@@ -5,16 +5,16 @@ import org.springframework.context.annotation.Bean;
 public class AppConfig {
 
     public AppConfig() {
-        System.out.println("AppConfig() ?˜¸ì¶œë¨!");
+        System.out.println("AppConfig() í˜¸ì¶œë¨!");
     }
     
-    @Bean // <== ë¹? ì»¨í…Œ?´?„ˆ?—ê²? ?´ ë©”ì„œ?“œë¥? ?˜¸ì¶œí•´?„œ ë¦¬í„´ ê°’ì„ ë³´ê??•˜?¼?Š” ëª…ë ¹
+    @Bean // <== ë¹ˆ ì»¨í…Œì´ë„ˆì—ê²Œ ì´ ë©”ì„œë“œë¥¼ í˜¸ì¶œí•´ì„œ ë¦¬í„´ ê°’ì„ ë³´ê´€í•˜ë¼ëŠ” ëª…ë ¹
     public Car getCar() {
-        System.out.println("getCar() ?˜¸ì¶œë¨!");
+        System.out.println("getCar() í˜¸ì¶œë¨!");
         Car c = new Car();
-        c.setModel("?†Œ?‚˜??");
+        c.setModel("ì†Œë‚˜íƒ€");
         c.setCc(1998);
-        c.setMaker("?˜„????™ì°?");
+        c.setMaker("í˜„ëŒ€ìë™ì°¨");
         return c;
     }
 }
