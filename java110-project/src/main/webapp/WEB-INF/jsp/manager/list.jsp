@@ -1,16 +1,14 @@
-<%@page import="bitcamp.java110.cms.domain.Manager"%>
-<%@page import="java.util.List"%>
-<%@page import="bitcamp.java110.cms.dao.ManagerDao"%>
 <%@ page language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset='UTF-8'>
 <title>매니저 관리</title>
-<link rel='stylesheet' href='../../css/common.css'>
+<link rel='stylesheet' href='/css/common.css'>
 <style>
 table, th, td {
     border: 1px solid gray;
@@ -22,7 +20,7 @@ table, th, td {
 <jsp:include page="../header.jsp"></jsp:include>
 
 <h1>매니저 목록</h1>
-<p><a href='form.html'>추가</a></p>
+<p><a href='form'>추가</a></p>
 <table>
 <thead>
 <tr>
@@ -30,21 +28,15 @@ table, th, td {
 </tr>
 </thead>
 <tbody>
-<%
-ManagerDao managerDao = (ManagerDao)this.getServletContext()
-.getAttribute("managerDao");
-List<Manager> list = managerDao.findAll();
-for (Manager m : list) {
-%>
+
+<c:forEach  items="${list}" var="m">
 <tr>
-    <td><%=m.getNo()%></td>
-    <td><a href='detail?no=<%=m.getNo()%>'><%=m.getName()%></a></td>
-    <td><%=m.getEmail()%></td>
-    <td><%=m.getPosition()%></td>
+    <td>${m.no}</td>
+    <td><a href='detail?no=${m.no}'>${m.name}</a></td>
+    <td>${m.email}</td>
+    <td>${m.position}</td>
 </tr>
-<%
-}
-%>
+</c:forEach>
 
 </tbody>
 </table>
