@@ -10,9 +10,9 @@
 <h1>Test26 - 3 페이지</h1>
 
 <form action="m4" method="post">
-<input type="checkbox" name="teacher" value="true">강사<br>
-
+<input type="checkbox" name="teacher"> 강사<br>
 <button>다음</button>
+
 </form>
 </body>
 </html>

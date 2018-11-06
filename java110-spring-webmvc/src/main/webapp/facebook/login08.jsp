@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" 
+    contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -7,9 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<h1>Test29.m4()</h1>
-
+${param.accessToken}
 </body>
 </html>
-<% System.out.println("m4.jsp..."); %>

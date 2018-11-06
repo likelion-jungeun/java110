@@ -20,29 +20,30 @@ public class AuthFilter implements Filter {
             ServletRequest request, 
             ServletResponse response, 
             FilterChain chain)
-                    throws IOException, ServletException {
-
+            throws IOException, ServletException {
+        
         HttpServletRequest httpRequest = (HttpServletRequest)request;
         HttpServletResponse httpResponse = (HttpServletResponse)response;
-
+        
         //String servletPath = httpRequest.getServletPath();
         //System.out.println(servletPath); // => /app
-
+        
         String pathInfo = httpRequest.getPathInfo();
         //System.out.println(pathInfo); // => /manager/add
-
+        
+        
         if (pathInfo.endsWith("add") ||
                 pathInfo.endsWith("delete")) {
-
+            
             // 로그인 여부 검사
             HttpSession session = httpRequest.getSession();
             Member loginUser = (Member)session.getAttribute("loginUser");
             if (loginUser == null) {
-                httpResponse.sendRedirect("/auth/login");
+                httpResponse.sendRedirect("/auth/form");
                 return;
             }
         }
-
+        
         chain.doFilter(request, response);
     }
 }

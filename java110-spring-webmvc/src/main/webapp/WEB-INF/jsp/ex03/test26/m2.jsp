@@ -10,8 +10,9 @@
 <h1>Test26 - 2 페이지</h1>
 
 <form action="m3" method="post">
-나이 : <input type="number" name="age"><br>
+나이: <input type="number" name="age"><br>
 <button>다음</button>
+
 </form>
 </body>
 </html>

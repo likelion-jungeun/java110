@@ -11,33 +11,53 @@ public class Test29 {
     
     // 인터셉터를 스프링에 등록하기
     // => XML 설정
-    //    - /WEB-INF/app-servlet.xml 참고
-    // => Java Config 설정
-    //    - 문서참조!
+    //    - /WEB-INF/app-servlet.xml 참고!
     //
-
+    // => Java Config 설정
+    //    - 문서 참고!
+    
     @GetMapping("m1")
     public void m1() throws Exception {
         System.out.println("Test29.m1()...");
-        
     }
-
+    
     @GetMapping("m2")
     public void m2() throws Exception {
         System.out.println("Test29.m2()...");
     }
-
+    
     @GetMapping("ok/m3")
     public void m3() throws Exception {
         System.out.println("Test29.m3()...");
-        
     }
     
     @GetMapping("no/m4")
     public void m4() throws Exception {
         System.out.println("Test29.m4()...");
-        
     }
-
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
